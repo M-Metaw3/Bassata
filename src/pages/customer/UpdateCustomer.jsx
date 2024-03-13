@@ -261,7 +261,7 @@ const {id} = useParams()
 
         </Box>
         <Box spacing={4} align="stretch">
-          <FormControl>
+          {/* <FormControl>
             <FormLabel>nationality</FormLabel>
             <Input
               type="text"
@@ -269,7 +269,7 @@ const {id} = useParams()
               onChange={(e) => setData({ ...daata, name: e.target.value })}
               required
             />
-          </FormControl>
+          </FormControl> */}
 
           <FormControl>
             <FormLabel>Phone number</FormLabel>

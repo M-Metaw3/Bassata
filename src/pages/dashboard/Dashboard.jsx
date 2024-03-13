@@ -33,7 +33,7 @@ const Dashboard = ({ withCalender }) => {
           </div>
         )} */}
       </div>
-      <Box border={"1px solid red"} w={'20%'} className="  shrink basis-0 justify-start items-start gap-3.5 inline-flex">
+      <Box border={"1px solid red"} w={'20%'} className="   basis-0 justify-start items-start gap-3.5 inline-flex">
         <Ploty />
       </Box>
     </div>

@@ -318,7 +318,7 @@ See all customers{" "}
                     }}
                       className="hidden"
                     />
-                    <div className="mt-7">Upload Customer docs </div>
+                    <div className="mt-7">front personal id </div>
                   </div>
                 </label>
 
@@ -358,7 +358,7 @@ See all customers{" "}
                       className="hidden"
 
                     />
-                    <div className="mt-7">Upload Customer docs </div>
+                    <div className="mt-7">back personal id </div>
                   </div>
                 </label>
 
@@ -396,7 +396,7 @@ See all customers{" "}
 
 
                     />
-                    <div className="mt-7">Upload Customer docs </div>
+                    <div className="mt-7"> contract </div>
                   </div>
                 </label>
  
@@ -450,7 +450,7 @@ See all customers{" "}
           <div className="mt-2.5">Verified </div>
         </div>
       </div>
-      <div class="self-stretch h-[6.688rem] flex-col justify-start items-start gap-[1.375rem] flex"><div class="text-neutral-700 text-lg font-normal font-['Inter']">Place set the customer id</div><div class="self-stretch justify-center items-start gap-2.5 inline-flex"><input type="text" id="amount" class="w-full h-16 p-2.5 rounded-2xl border border-zinc-500 flex-col justify-start items-start gap-2.5 flex self-stretch text-lg font-normal font-['Inter'] focus:outline-none focus:border-red-600" placeholder="personal_id" required="" {...register('personal_id', { required: 'personal_id is required' })}/></div></div>
+      <div class="self-stretch h-[6.688rem] flex-col justify-start items-start gap-[1.375rem] flex"><div class="text-neutral-700 text-lg font-normal font-['Inter']">please set the customer id</div><div class="self-stretch justify-center items-start gap-2.5 inline-flex"><input type="text" id="amount" class="w-full h-16 p-2.5 rounded-2xl border border-zinc-500 flex-col justify-start items-start gap-2.5 flex self-stretch text-lg font-normal font-['Inter'] focus:outline-none focus:border-red-600" placeholder="personal_id" required="" {...register('personal_id', { required: 'personal_id is required' })}/></div></div>
 
     </div>
 
@@ -501,7 +501,7 @@ See all customers{" "}
         </div>
       </div>
       <div className="mx-9 mt-10 max-md:mr-2.5 max-md:max-w-full">
-        Place enter the customer Details{" "}
+      please enter the customer Details{" "}
       </div>
       <div className="flex gap-2.5 justify-center self-center mt-5 w-full whitespace-nowrap max-w-[720px] text-zinc-400 max-md:flex-wrap max-md:max-w-full">
       <input type="text" id="amount" class="w-full h-16 p-2.5 rounded-2xl border border-zinc-500 flex-col justify-start items-start gap-2.5 flex self-stretch text-lg font-normal font-['Inter'] focus:outline-none focus:border-red-600" placeholder="Name" {...register('name', { required: 'First Name is required' })}/>
@@ -513,7 +513,7 @@ See all customers{" "}
       <input type="text" id="amount" class="w-[720px] mx-auto my-4 h-16 p-2.5 rounded-2xl border border-zinc-500 flex-col justify-start items-start gap-2.5 flex self-stretch text-lg font-normal font-['Inter'] focus:outline-none focus:border-red-600" placeholder="E-mail" {...register('email', { required: ' email is required' })} required=""/>
 
       <div className="mx-9 mt-10 max-md:mr-2.5 max-md:max-w-full">
-        Place add balance to the wallet
+      please add balance to the wallet
       </div>
       <input type="text" {...register('initial_balance', { required: 'First initial_balance is required' })} id="amount" class="w-[720px] mx-auto my-4 h-16 p-2.5 rounded-2xl border border-zinc-500 flex-col justify-start items-start gap-2.5 flex self-stretch text-lg font-normal font-['Inter'] focus:outline-none focus:border-red-600" placeholder="Enter your blance" required=""/>
 
@@ -534,14 +534,14 @@ See all customers{" "}
 
               <div className="flex flex-col items-start pt-9 pr-20 pb-20 text-lg max-w-full text-neutral-700 max-md:pr-5">
       <div className="max-md:max-w-full">
-        Place enter the customer nationality
+      please enter the customer nationality
       </div>
       <Select      {...register('nationality_id', { required: 'First Name is required' })} borderRadius={"20px"} outline={"none"}  width={"100%"} h={"70px"} placeholder='nationality'>
   <option value='1'>Egypt</option>
   <option value='2'>Emirate</option>
 </Select>
       <div className="mt-40 max-md:mt-10 max-md:max-w-full">
-        Place enter the customer type{" "}
+        please enter the customer type{" "}
       </div>
       <Select      {...register('type', { required: 'First Name is required' })} borderRadius={"20px"} outline={"none"}  width={"100%"} h={"70px"} placeholder='customer type'>
   <option value='individual'> individual</option>

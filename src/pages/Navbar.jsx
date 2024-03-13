@@ -37,19 +37,13 @@ const {openmodal} = useSelector((state) => state.customer)
             />
             <div >Add new customer </div>
           </Button>
-          <Button>
-          <img
-            loading="lazy"
-            src="https://cdn.builder.io/api/v1/image/assets/TEMP/ae635711d8d6ca539a2819634eb47fa1f9ae421c0dcb1fd069c01e5bd5b7a3d4?"
-            className="self-stretch my-auto aspect-[0.97] w-[31px]"
-          />
-          </Button>
+  
           <div className="flex gap-1 justify-between self-stretch">
             <img
               loading="lazy"
               alt='profileImage'
               src={user?.profile}
-              className="aspect-square w-[87px]"
+              className="aspect-square w-[80px]"
             />
             <div className="flex flex-col flex-1 my-auto">
               <div className="text-2xl text-neutral-700">{user?.name}</div>

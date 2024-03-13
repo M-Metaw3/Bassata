@@ -96,7 +96,7 @@ const Ploty = () => {
   }, []); // Empty dependency array to run the effect only once on mount
 
   return (
-    <Box m={"20px"} ref={plotRef} id="plot" className="w-[50%]">
+    <Box m={"20px"} ref={plotRef} id="plot" className="w-full">
       {/* Content goes here */}
     </Box>
   );
