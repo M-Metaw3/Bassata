@@ -262,6 +262,7 @@ if(formData?.role_id!=data?.data?.role?.id){
 
 
 
+<div className="mt-7 ">Upload Admin profile : </div>
         <label
                   onDragOver={(e) => handleDragOver(e)}
                   onDrop={(e) => handleDrop(e, setFile1, setFileName1)
@@ -298,7 +299,6 @@ if(formData?.role_id!=data?.data?.role?.id){
                     }}
                       className="hidden"
                     />
-                    <div className="mt-7">Upload Customer docs </div>
                   </div>
                 </label>
 

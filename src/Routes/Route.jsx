@@ -60,13 +60,13 @@ const Routess = () => {
     
    <Route  path='/layout/roles' element={<Addrole />}/>
    <Route path='/layout/addadmin' element={<AdminView />}/>
-   <Route index element={<Dashboard />}/>
+   <Route index element={<Reports />}/>
    <Route path='/layout/customer' element={<Customer />}/>
    <Route path='/layout/mmf' element={<MMF />}/>
    <Route path='/layout/admins' element={<Admins />}>
    </Route>
 
-   <Route path='/layout/reports' element={<Reports />}/>
+   {/* <Route path='/layout/reports' element={<Reports />}/> */}
 
    <Route path='/layout/branches' element={<Branches />}/>
 
