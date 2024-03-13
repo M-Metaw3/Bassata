@@ -34,7 +34,6 @@ const CrudComponent = () => {
         queryFn: () =>
         GetDataProtected("/role")
       })
-console.log(data);
 
 
 
@@ -53,7 +52,6 @@ console.log(data);
       try {
         setLoading(true);
         const response = await GetDataProtected("/permission")
-console.log(response?.data)
 
         setData(response?.data);
         // setPermissions(response.data.data);
@@ -78,7 +76,6 @@ console.log(response?.data)
             permissions: selectedPermissions,
           });
           setLoading(false);
-        console.log(response)
         if(response.status ==201){
 
             alert("success added")

@@ -43,7 +43,6 @@ const {id} = useParams()
         const response = await GetDataProtected('branch'); // Replace with your actual API endpoint for branches
         // Assuming the response contains an array of branches
         // Set the branch data in formData
-        console.log(response)
         setbranches(response?.data);
       } catch (err) {
         console.error('Error fetching branches:', err);
@@ -111,15 +110,12 @@ useEffect(() => {
      // Will be fetched from an API
   } || null); // Update state when data changes
 }, [data]);
-console.log(data?.data?.branch?.id)
-console.log(formData?.branch_id)
 const [loading, setloading] = useState(false);
 const toast = useToast();
 
 
 const handleUpdate = async (event) => {
     event.preventDefault();
-console.log(formData.role_id)
 // Create a new FormData object
 
 const updatedData = new FormData();
@@ -155,7 +151,6 @@ if(formData?.role_id!=data?.data?.role?.id){
 
       // Make an API call to update user data
       const response = await PostDataWithImg(`user/${data?.data?.id}`, updatedData);
-      console.log(response.data); // Handle the response as needed
       if(response.status==200){
         setloading(false)
                 
@@ -185,7 +180,6 @@ if(formData?.role_id!=data?.data?.role?.id){
             }
               
     } catch (error) {
-      console.log(error)
       setloading(false)
   
             toast({
@@ -199,7 +193,6 @@ if(formData?.role_id!=data?.data?.role?.id){
   };
   if(isPending) return <Skeletoncomp/>
 
-console.log(formData.personal_id)
   return (
     <Box alignItems={"center"} width={"90%"} my={"auto"} p={"10px"} mx={"auto"}>
       <h2 className="text-2xl font-semibold mb-4">Update admin :  { formData?.name}</h2>

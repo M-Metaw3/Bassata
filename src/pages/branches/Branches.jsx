@@ -44,7 +44,6 @@ const Branches = () => {
     GetDataProtected("branch")
   })
 
-console.log(data)
 
   const { isOpen, onOpen, onClose } = useDisclosure()
 
@@ -82,7 +81,6 @@ console.log(data)
 
 
   const handeleredit =(brn)=>{
-    console.log(brn)
     dispatch(openmodalbranches(true))
     dispatch(editbranc(brn))
 

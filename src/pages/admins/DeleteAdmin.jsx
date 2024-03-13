@@ -12,7 +12,6 @@ const DeleteAdmin = () => {
     const cancelRef = React.useRef()
 
     const {user,openmodaldelete} = useSelector((state) => state.admins)
-    console.log(deleteadmin)
     const dispatch = useDispatch()
     const toast = useToast();
 
@@ -20,7 +19,6 @@ const deleteuser=async()=>{
 try {
 
     const res= await DeleteData(`user/${user?.id}`)
-    console.log(res)
     if(res.status==200){
 
         toast({

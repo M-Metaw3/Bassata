@@ -15,7 +15,6 @@ const Addbranches = ({updates}) => {
     queryFn: () =>
     GetDataProtected("user")
   })
-  console.log(data?.data)
   const {
     register,
     handleSubmit,
@@ -28,11 +27,9 @@ const Addbranches = ({updates}) => {
 
 
   const onSubmit = async (data) => {
-    console.log(data);
 try {
 
   const branches =await PostData("branch",data)  
-  console.log(branches)
 
 
   if(branches.status==201){
@@ -107,7 +104,6 @@ try {
         {...register('manager_id', { required: 'Admin name is required' })}
         onChange={(e) => {
  
-          console.log('Selected value:', e.target.value);
         }}
         
         className="flex flex-col justify-center p-6 mt-2 w-full rounded-2xl h-18 border border-solid border-[color:var(--Gray-Gray-4,#838383)] max-w-[720px] text-zinc-400 max-md:max-w-full"

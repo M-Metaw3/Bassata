@@ -102,7 +102,6 @@ const [formData, setFormData] = useState({
       onOpen()
     }
   const handeleredit =(use)=>{
-console.log(use.id)
 dispatch(editadmin(use))
 
 // setupdates((pre)=>!pre)

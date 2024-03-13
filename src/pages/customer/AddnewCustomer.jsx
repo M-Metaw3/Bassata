@@ -99,7 +99,6 @@ const toast = useToast();
 
 
       const response = await PostDataWithImg("customer",dataa)
-      console.log(response)
       if(response.status==201){
         
         toast({

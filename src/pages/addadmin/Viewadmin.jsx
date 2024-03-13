@@ -55,7 +55,6 @@ const Viewadmin = () => {
         queryFn: () =>
         GetDataProtected("user")
       })
-    console.log(data);
 
 
 
@@ -121,7 +120,6 @@ const Viewadmin = () => {
         role_id:0
     
       })
-console.log(formData)
 
       const deleteUser = async (userId) => {
         try {

@@ -37,10 +37,10 @@ import UpdateCustomer from './../pages/customer/UpdateCustomer';
 
 
 const Routess = () => {
-  const userCookie = Cookies?.get('user');
-  const user = userCookie ? JSON.parse(userCookie) : undefined;
-  const jwtCookie = Cookies?.get('user');
-  const jwt = jwtCookie ? JSON.parse(jwtCookie) : undefined;
+  // const userCookie = Cookies?.get('user');
+  // const user = userCookie ? JSON.parse(userCookie) : undefined;
+  // const jwtCookie = Cookies?.get('user');
+  // const jwt = jwtCookie ? JSON.parse(jwtCookie) : undefined;
 
 
 

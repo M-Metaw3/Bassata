@@ -12,7 +12,6 @@ const DeleteBranch = () => {
     const cancelRef = React.useRef()
 
     const {openmodaldelete,deletebranch} = useSelector((state) => state.branches)
-    console.log(deletebranch)
     const dispatch = useDispatch()
     const toast = useToast();
 
@@ -20,7 +19,6 @@ const deletebranches=async()=>{
 try {
 
     const res= await DeleteData(`branch/${deletebranch?.id}`)
-    console.log(res)
     if(res.status==200){
 
         toast({
@@ -35,7 +33,6 @@ try {
     }
     
 } catch (error) {
-    console.log(error)
 }
 
 

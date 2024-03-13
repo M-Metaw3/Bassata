@@ -28,7 +28,6 @@ const Editbranches = () => {
   })
     const {editbranch} = useSelector((state) => state.branches)
     const [editedBranch, setEditedBranch] = useState({ ...editbranch });
-    console.log(editbranch)
     const dispatch = useDispatch()
     const OverlayOne = () => (
         <ModalOverlay
@@ -65,7 +64,6 @@ const Editbranches = () => {
 
 try {
   const response= await UpdateData(`branch/${editedBranch?.id}`,editedBranch)
-  console.log(response)
   if(response.status==200){
 
     toast({
@@ -79,7 +77,6 @@ try {
       window.location.reload()
 }
 } catch (error) {
-  console.log(error)
 }
 
       }
