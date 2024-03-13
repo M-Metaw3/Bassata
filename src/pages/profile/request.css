@@ -1,0 +1,60 @@
+.text1{
+  color: #2e76bf;
+  font-family: "Open Sans-Medium", Helvetica;
+  font-size: 16px;
+  font-weight: 500;
+  left: 968px;
+  letter-spacing: 0;
+  line-height: normal;
+}
+.m1{
+  color: #00be85;
+  font-family: var(--display-2-regular-font-family);
+  font-size: var(--display-2-regular-font-size);
+  font-style: var(--display-2-regular-font-style);
+  font-weight: var(--display-2-regular-font-weight);
+  letter-spacing: var(--display-2-regular-letter-spacing);
+  line-height: var(--display-2-regular-line-height);
+  margin-top: -1px;
+  background-color: var(--neutral-colors100);
+  border: 1px solid;
+  border-color: var(--neutral-colors300);
+  border-radius: 6px;
+  box-shadow: var(--neutral-shadow-02);
+  white-space: nowrap;
+}
+.cont{
+  background-color: var(--neutral-colors100);
+  border: 1px solid;
+  border-color: var(--neutral-colors300);
+  border-radius: 6px;
+  box-shadow: var(--neutral-shadow-02);
+}
+.input-text {
+  align-items: center;
+  background-color: var(--neutral-colors100);
+  border: 1px solid;
+  border-color: var(--neutral-colors300);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  height: 159px;
+  justify-content: center;
+  overflow: hidden;
+  padding: 18px 16px;
+  position: relative;
+
+}
+
+.input-text .group {
+  height: 48.54px;
+  position: relative;
+  width: 37.5px;
+}
+.group{
+  height: 37px;
+
+  width: 37;
+  margin: 5px;
+}
