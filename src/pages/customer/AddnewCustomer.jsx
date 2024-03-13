@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 
 import {
   Drawer,
@@ -15,6 +15,7 @@ import { useForm } from 'react-hook-form';
 import { useSelector, useDispatch } from 'react-redux'
 import {openmodalcustomer } from '../../store/slice/customer'
 import { PostDataWithImg } from '../../api/apiFactory';
+import { GetDataProtected } from './../../api/apiFactory';
 function AddnewCustomer() {
 ////   // useEffect(() => {
 //   //   // Fetch nationalities data and set it to the state
@@ -73,7 +74,28 @@ function AddnewCustomer() {
     }
 const [next, setnext] = useState(false);
   
-  
+const [nationalities, setNationalities] = useState([]);
+const [newNationality, setNewNationality] = useState('');
+
+
+
+useEffect(() => {
+  const fetchNationalities = async () => {
+    try {
+      const response = await GetDataProtected('nationality');
+      console.log(response)
+      console.log("response")
+
+      setNationalities(response.data);
+    } catch (error) {
+      console.log(error)
+      console.error('Error fetching nationalities:', error);
+    }
+  };
+  fetchNationalities()
+}, []);
+const [loading, setloading] = useState(false);
+
 const toast = useToast();
   const onSubmit =async (data) => {
     console.log(data)
@@ -96,6 +118,7 @@ const toast = useToast();
 
 
 
+      setloading(true)
 
 
       const response = await PostDataWithImg("customer",dataa)
@@ -117,6 +140,7 @@ const toast = useToast();
                 return;
               }
       if(response.response.status==500){
+        setloading(false)
 
         toast({
           title: 'Error',
@@ -129,6 +153,8 @@ const toast = useToast();
       }
     } catch (error) {
       console.log(error)
+    setloading(true)
+
       toast({
         title: 'Error',
         description:error?.response?.data?.message,
@@ -537,8 +563,10 @@ See all customers{" "}
       please enter the customer nationality
       </div>
       <Select      {...register('nationality_id', { required: 'First Name is required' })} borderRadius={"20px"} outline={"none"}  width={"100%"} h={"70px"} placeholder='nationality'>
-  <option value='1'>Egypt</option>
-  <option value='2'>Emirate</option>
+ {nationalities?.map((el)=>(
+   
+   <option value={el?.id}>{el?.name}</option>
+   ))} 
 </Select>
       <div className="mt-40 max-md:mt-10 max-md:max-w-full">
         please enter the customer type{" "}
@@ -608,9 +636,9 @@ See all customers{" "}
  {next!=4&&   <button onClick={()=>setnext((pre)=>pre+1)} class="grow shrink basis-0 h-16 p-4 bg-red-600 rounded-2xl justify-center items-center gap-2.5 flex cursor-pointer">
       <div class="text-right text-neutral-200 text-lg font-normal font-['Roboto']">next</div>
     </button>}
-  {next==4&& <button type='submit' class="grow shrink basis-0 h-16 p-4 bg-red-600 rounded-2xl justify-center items-center gap-2.5 flex cursor-pointer">
+  {next==4&& <Button  type='submit' class="grow shrink basis-0 h-16 p-4 bg-red-600 rounded-2xl justify-center items-center gap-2.5 flex cursor-pointer">
       <div class="text-right text-neutral-200 text-lg font-normal font-['Roboto']">finished</div>
-    </button>}
+    </Button>}
   {/* { next==0&& <button  type="submit"  class="grow shrink basis-0 h-16 p-4 bg-red-600 rounded-2xl justify-center items-center gap-2.5 flex cursor-pointer" style={{ display: 'none' }}>
       <div class="text-right text-neutral-200 text-lg font-normal font-['Roboto']">See all customers</div>
     </button>} */}
