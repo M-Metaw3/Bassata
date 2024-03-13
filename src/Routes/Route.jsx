@@ -45,7 +45,6 @@ const Routess = () => {
 
 
 
-console.log(user.role)
 
 
 
