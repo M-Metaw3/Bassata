@@ -1,7 +1,7 @@
 
 import React, { useState,useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import {Box,useToast} from'@chakra-ui/react'
+import {Box,useToast,Button} from'@chakra-ui/react'
 import {PostDataWithImg,GetDataProtected} from'../api/apiFactory'
 import Profile from './../pages/profile/Profile';
 
@@ -16,6 +16,7 @@ const Cardaddadmin = () => {
   const [branches, setbranches] = useState([]);
   const [roles, setroles] = useState([]);
 
+  const [loading, setloading] = useState(false);
 
   useEffect(() => {
     const fetchBranch = async () => {
@@ -87,11 +88,11 @@ console.log(data.profile[0])
 
 
 
-
+      setloading(true)
       const response = await PostDataWithImg("user",dataa)
       console.log(response)
       if(response.status==201){
-        
+        setloading(false)
         toast({
           title: 'success',
           description: 'success registeration please verify your account and then log in',
@@ -104,6 +105,7 @@ console.log(data.profile[0])
                 return;
               }
       if(response.response.status==500){
+        setloading(false)
 
         toast({
           title: 'Error',
@@ -116,6 +118,8 @@ console.log(data.profile[0])
       }
     } catch (error) {
       console.log(error)
+      setloading(false)
+
       toast({
         title: 'Error',
         description:error?.response?.data?.message,
@@ -349,12 +353,16 @@ console.log(data.profile[0])
         )}
       </div>
    
-      <button
+      <Button
+      bg="red-600"
+      p={'30px'}
+      _hover={{ bg: 'red-700' }}
+      isLoading={loading}
         type="submit"
         className="hover:bg-red-500 grow w-full justify-center my-[10px] items-center px-16 py-6 bg-red-600 rounded-2xl text-center text-neutral-200 max-md:px-5"
       >
         Save
-      </button>
+      </Button>
     </form>
   );
 };
