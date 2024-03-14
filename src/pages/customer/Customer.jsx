@@ -121,19 +121,19 @@ return (
 <Box className="flex flex-col justify-center px-3.5 py-3.5 bg-white border-b border-solid border-stone-300">
       <Box className="flex gap-5 justify-between w-full max-md:flex-wrap max-md:max-w-full">
         <Box  width={'90%'} className="flex gap-0 text-lg font-bold leading-7 text-red-600 capitalize max-md:flex-wrap max-md:max-w-full">
-          <Box width={"19%"} alignItems={"center"} fontSize={{base:"0.7rem",lg:'1rem'}}  className=" justify-center  items-center lg:pr-16  py-5 pr-4 pl-4 max-md:pr-5">
+          <Box width={"19%"} alignItems={"center"} fontSize={{base:"0.85rem",lg:'1rem'}}  className=" justify-center  items-center lg:pr-16  py-5 pr-4 pl-4 max-md:pr-5">
             Customer name{" "}
           </Box>
-          <Box width={"19%"} fontSize={{base:"0.7rem",lg:'1rem'}} className=" justify-center items-center py-5 lg:pr-16 pr-4 pl-4  max-md:pr-6">
+          <Box width={"19%"} fontSize={{base:"0.85rem",lg:'1rem'}} className=" justify-center items-center py-5 lg:pr-16 pr-4 pl-4  max-md:pr-6">
             Customer type
           </Box>
-          <Box width={"19%"} fontSize={{base:"0.7rem",lg:'1rem'}}  className=" justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
+          <Box width={"19%"} fontSize={{base:"0.85rem",lg:'1rem'}}  className=" justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
             Phone
           </Box>
-          <Box width={"19%"} fontSize={{base:"0.7rem",lg:'1rem'}}  className=" justify-center items-center py-5 lg:pr-16 pr-4 pl-4  max-md:pr-5">
+          <Box width={"19%"} fontSize={{base:"0.85rem",lg:'1rem'}}  className=" justify-center items-center py-5 lg:pr-16 pr-4 pl-4  max-md:pr-5">
             Wallet balance{" "}
           </Box>
-          <Box  width={"19%"} fontSize={{base:"0.7rem",lg:'1rem'}}  className=" justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
+          <Box  width={"19%"} fontSize={{base:"0.85rem",lg:'1rem'}}  className=" justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
             ID{" "}
           </Box>
         </Box>
@@ -161,19 +161,19 @@ return (
   <Box cursor={"pointer"}   _hover={{bg:"red.200",transition:'0.7s'}} className="flex flex-col justify-center px-3.5 py-3.5 text-lg leading-7 text-black capitalize bg-white">
       <Box  className="flex gap-5 justify-between pr-2.5 w-full max-md:flex-wrap max-md:max-w-full">
         <Box width={"90%"} className="flex gap-0 max-md:flex-wrap max-md:max-w-full">
-          <Box  width={"19%"} fontSize={{base:"0.7rem",lg:'1rem'}}  className=" justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
+          <Box  width={"19%"} fontSize={{base:"0.8rem",lg:'1rem'}}  className=" justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
             {el?.name} {" "}
           </Box>
-          <Box width={"19%"} fontSize={{base:"0.7rem",lg:'1rem'}}  className=" justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
+          <Box width={"19%"} fontSize={{base:"0.8rem",lg:'1rem'}}  className=" justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
             {el?.type}{" "}
           </Box>
-          <Box width={"19%"} fontSize={{base:"0.7rem",lg:'1rem'}}  className=" justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
+          <Box width={"19%"} fontSize={{base:"0.8rem",lg:'1rem'}}  className=" justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
             {el?.phone_number}
           </Box>
-          <Box width={"19%"} fontSize={{base:"0.7rem",lg:'1rem'}}  className=" justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
+          <Box width={"19%"} fontSize={{base:"0.8rem",lg:'1rem'}}  className=" justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
             {el?.initial_balance}${" "}
           </Box>
-          <Box width={"19%"} fontSize={{base:"0.7rem",lg:'1rem'}}  className="justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
+          <Box width={"19%"} fontSize={{base:"0.8rem",lg:'1rem'}}  className="justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
             {el?.personal_id}
           </Box>
         </Box>

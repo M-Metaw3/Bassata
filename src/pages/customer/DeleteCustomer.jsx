@@ -59,7 +59,7 @@ try {
               </AlertDialogHeader>
   
               <AlertDialogBody>
-                Are you sure? Yto delete this branch {user?.name}
+                Are you sure? Yto delete this customer {user?.name}
               </AlertDialogBody>
   
               <AlertDialogFooter>
