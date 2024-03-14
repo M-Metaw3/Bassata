@@ -23,8 +23,9 @@ const Layout = ({x}) => {
      <HamburgerIcon/>
       </Button></Box>
    <Box display={"flex"}>
-
-       <Box   display={condition ? { base: "block" } : { base: "none", lg: "block" }}    mr={"20px"} w={"20%"} >
+{/* aaaaaaaa */}
+       {/* <Box   display={condition ? { base: "block" } : { base: "none", lg: "block" }}    mr={"20px"} w={"20%"} > */}
+       <Box   display={ { base: `${condition?"block":"none"}`, lg: "block" }}    mr={"20px"} w={"20%"} >
 
 <Footer/>
 </Box>
