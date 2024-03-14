@@ -122,7 +122,7 @@ const Footer = ({user}) => {
 
 
 {hasAnyPermission(user,"Full-Access","View-Everything")&&(  <NavLink to={'/layout/nationalit'}>
-      <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/reports")&&'bg-rose-900 text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
+      <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/nationalit")&&'bg-rose-900 text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
         <Box className="flex gap-2">
           <img
             loading="lazy"
