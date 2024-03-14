@@ -26,7 +26,7 @@ const nav=useNavigate()
             <img
               loading="lazy"
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/57698db732cfd279a549017f023afaa3234936e6a6a9b566ab674694db3650e8?"
-              className="w-6 aspect-square"
+              className="w-6 p-2 aspect-square"
             />
             </button>
             <input placeholder='Search' className='p-4 focus:broder-black-300  outline-none placeholder-slate-500: bg-transparent w-full h-full'/>
@@ -34,13 +34,13 @@ const nav=useNavigate()
         </Box>
         <Box  className="flex gap-5 justify-between items-center max-md:flex-wrap max-md:max-w-full">
         {hasAnyPermission(user,"Full-Access","Create-Everything","Create-Employee") && (
-  <Button onClick={() => dispatch(openmodalcustomer(true))} bg={"red"} p={"5%"} className="flex gap-2.5 justify-center self-stretch px-11 py-5 my-auto text-lg text-right bg-red-600 rounded-2xl text-neutral-200 max-md:px-5">
+  <Button onClick={() => dispatch(openmodalcustomer(true))} bg={"red"} p={"7%"} className="flex gap-2.5 justify-center  px-11 py-5 my-auto text-lg text-right bg-red-600 rounded-2xl text-neutral-200 max-md:px-5">
     <img
       loading="lazy"
       src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb8663721bc77ba949380b93cfece2400850f5c88d002b7edf43d1d6d344612a?"
       className="w-6 aspect-square"
     />
-    <div>Add new customer</div>
+    <div className='p-2'>Add new customer</div>
   </Button>)}
   
           <div className="flex gap-1 justify-between self-stretch">
