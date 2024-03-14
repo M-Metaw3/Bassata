@@ -97,8 +97,12 @@ useEffect(() => {
   fetchNationalities()
 }, []);
 const [loading, setloading] = useState(false);
+const [showcontract, setshowcontract] = useState(false);
+const [type, settype] = useState(false);
+
 
 const toast = useToast();
+
   const onSubmit =async (data) => {
     console.log(data)
     
@@ -106,7 +110,7 @@ const toast = useToast();
     dataa.append('name', data.name);
     dataa.append('email', data.email);
     dataa.append('personal_id', data.personal_id);
-    dataa.append('type', data.type);
+    dataa.append('type', type);
     dataa.append('front_personal_id', file1);
     dataa.append('phone_number', data.phone_number);
     dataa.append('back_personal_id', file2);
@@ -172,7 +176,7 @@ const toast = useToast();
    
    return window.location.href = "/layout";
  } 
-
+console.log(showcontract)
     return (
       <>
         
@@ -350,7 +354,7 @@ See all customers{" "}
                     }}
                       className="hidden"
                     />
-                    <div className="mt-7">front personal id </div>
+                    <div className="mt-7">{type=='cooperate'?'Tax Card':'front personal id'} </div>
                   </div>
                 </label>
 
@@ -390,7 +394,7 @@ See all customers{" "}
                       className="hidden"
 
                     />
-                    <div className="mt-7">back personal id </div>
+                    <div className="mt-7"> {type=='cooperate'?'CR':'back personal id'} </div>
                   </div>
                 </label>
 
@@ -577,9 +581,13 @@ See all customers{" "}
       <div className="mt-40 max-md:mt-10 max-md:max-w-full">
         please enter the customer type{" "}
       </div>
-      <Select      {...register('type', { required: 'First Name is required' })} borderRadius={"20px"} outline={"none"}  width={"100%"} h={"70px"} placeholder='customer type'>
+      <Select   onChange={(e) => { 
+  console.log(e.target.value);
+  e.target.value === "cooperate" && setshowcontract(true); 
+settype(e.target.value)
+}}  borderRadius={"20px"} outline={"none"}  width={"100%"} h={"70px"} placeholder='customer type'>
   <option value='individual'> individual</option>
-  <option value='cooperate'>cooperate </option>
+  <option value='cooperate'>Corporate </option>
 </Select>
     </div>
 
