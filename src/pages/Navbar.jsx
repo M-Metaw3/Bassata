@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Button } from '@chakra-ui/react';
+import { Box, Button,Avatar } from '@chakra-ui/react';
 import profile from '../assets/Frame (1).png'  
 import { useDispatch,useSelector } from 'react-redux';
 import {openmodalcustomer } from '../store/slice/customer'
@@ -39,12 +39,12 @@ const {openmodal} = useSelector((state) => state.customer)
           </Button>
   
           <div className="flex gap-1 justify-between self-stretch">
-            <img
-              loading="lazy"
+            
+                <Avatar size='lg' name='Dan Abrahmov' 
               alt='profileImage'
+
               src={user?.profile}
-              className="aspect-square w-[80px]"
-            />
+              />
             <div className="flex flex-col flex-1 my-auto">
               <div className="text-2xl text-neutral-700">{user?.name}</div>
               <div className="mt-1 text-lg text-zinc-400">{user?.role?.name}</div>
