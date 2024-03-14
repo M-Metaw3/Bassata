@@ -54,9 +54,9 @@ const {openmodal} = useSelector((state) => state.customer)
       </div>
     </Box>
     <Box display={{base:"none" , xl:"none",lg:"none " ,sm:"block" }}>
-      <Box>
+      {/* <Box>
         add customer 
-      </Box>
+      </Box> */}
     </Box>
     </div>
     
