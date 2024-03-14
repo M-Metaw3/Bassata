@@ -41,6 +41,7 @@ export default function Registration({isjwt,islogin}) {
     email: '',
     password: '',
   });
+  const [loading, setloading] = useState(false);
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevData) => ({
@@ -57,9 +58,10 @@ export default function Registration({isjwt,islogin}) {
  
     
     try {
+      setloading(true)
       const response = await PostDatalogin('auth/login', formData);
-      console.log(response);
       if (response.status === 200) {
+        setloading(false)
         toast({
           title: 'Success',
           description: 'Success login.',
@@ -77,6 +79,8 @@ export default function Registration({isjwt,islogin}) {
 
       }
       if (response.response && response.response.status === 401) {
+        setloading(false)
+
         toast({
           title: 'Warnning',
           description: response.response.data.message,
@@ -86,6 +90,8 @@ export default function Registration({isjwt,islogin}) {
         });
       }
     } catch (error) {
+      setloading(false)
+
       console.error('Error:', error);
     }
   };
@@ -253,9 +259,9 @@ export default function Registration({isjwt,islogin}) {
                 />
               </Box>
             </div>
-            <button onClick={handleSubmit}  className="justify-center hover:bg-red-400 items-center px-16 py-4 mt-8 text-center whitespace-nowrap bg-red-600 rounded-2xl text-neutral-200 max-md:px-5 max-md:max-w-full">
+            <Button isLoading={loading} bg={"red.500"} p={"40px"} onClick={handleSubmit}  className="justify-center hover:bg-red-400 items-center px-16 py-4 mt-8 text-center whitespace-nowrap bg-red-600 rounded-2xl text-neutral-200 max-md:px-5 max-md:max-w-full">
               Log in{" "}
-            </button>
+            </Button>
           </div>
         </div>
         <Box display={{base:"none" ,md:'block'}} h={"100vh"} className="flex flex-col ml-5 w-[65%] max-md:ml-0 max-md:w-full">
