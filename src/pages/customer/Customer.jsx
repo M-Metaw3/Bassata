@@ -22,7 +22,9 @@ import {deletecustomer,openmodalcustomer } from '../../store/slice/customer'
 import Skeletoncomp from './../../components/Skeletoncomp';
 import { NavLink } from 'react-router-dom';
 import DeleteCustomer from './DeleteCustomer';
-const Customer = () => {
+import { hasAnyPermissionwithout } from '../../permissons';
+const Customer = ({user}) => {
+  console.log(user)
   const { isPending, error, data } = useQuery({
     queryKey: ['customer'],
     queryFn: () =>
@@ -71,6 +73,11 @@ const handleClick = (newSize) => {
 
 
 if(isPending) return <Skeletoncomp/>
+if(!user){
+   
+  return window.location.href = "/";
+} 
+
 return (
   
 
@@ -96,17 +103,17 @@ return (
 }
 <Box>
 <Box className="flex gap-5 justify-between max-md:flex-wrap">
-      <Box  className="flex-auto my-auto text-2xl leading-5 text-black">
+ {  hasAnyPermissionwithout("Full-Access","View-Everything","View-Employee")&&(   <Box  className="flex-auto my-auto text-2xl leading-5 text-black">
         Customers : <span style={{color:"red"}}>{data?.data?.length}</span>
-      </Box>
-      <button onClick={()=>dispatch(openmodalcustomer(true))} className="flex hover:bg-red-500  hover:transition-2s gap-2.5 justify-center px-11 py-5 text-lg text-right whitespace-nowrap bg-red-600 rounded-2xl text-neutral-200 max-md:px-5">
+      </Box>)}
+    { hasAnyPermissionwithout("Full-Access","Create-Everything","Create-Employee")&& <button onClick={()=>dispatch(openmodalcustomer(true))} className="flex hover:bg-red-500  hover:transition-2s gap-2.5 justify-center px-11 py-5 text-lg text-right whitespace-nowrap bg-red-600 rounded-2xl text-neutral-200 max-md:px-5">
         <img
           loading="lazy"
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb8663721bc77ba949380b93cfece2400850f5c88d002b7edf43d1d6d344612a?"
           className="shrink-0 w-6 aspect-square"
         />
         <div className="grow my-auto">Add new customer </div>
-      </button>
+      </button>}
 </Box>
 
 
@@ -117,7 +124,7 @@ return (
 
 
 
-<Box>
+ {hasAnyPermissionwithout("Full-Access","View-Everything","View-Employee")&&<Box>
 <Box className="flex flex-col justify-center px-3.5 py-3.5 bg-white border-b border-solid border-stone-300">
       <Box className="flex gap-5 justify-between w-full max-md:flex-wrap max-md:max-w-full">
         <Box  width={'90%'} className="flex gap-0 text-lg font-bold leading-7 text-red-600 capitalize max-md:flex-wrap max-md:max-w-full">
@@ -147,7 +154,7 @@ return (
       </Box>
 
     </Box>
-</Box>
+</Box>}
 
 
 
@@ -156,7 +163,7 @@ return (
 
 
 
-<Box >
+{hasAnyPermissionwithout("Full-Access","View-Everything","View-Employee")&&<Box >
 {data?.data?.map((el)=>(
   <Box cursor={"pointer"}   _hover={{bg:"red.200",transition:'0.7s'}} className="flex flex-col justify-center px-3.5 py-3.5 text-lg leading-7 text-black capitalize bg-white">
       <Box  className="flex gap-5 justify-between pr-2.5 w-full max-md:flex-wrap max-md:max-w-full">
@@ -193,17 +200,21 @@ return (
       // onClick={()=>handeleredit(el)} 
       className="flex flex-col justify-center hover:bg-red-600 items-start py-4 pr-16 pl-6 w-full bg-white">
         <div className="flex gap-2  w-[160px]">
-          <img
+        {hasAnyPermissionwithout("Full-Access","Update-Employee","Update-Everything")&&      <img
             loading="lazy"
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/358746b37b4522e3a18dca93d87bba09783b2bff6bd1ded5a183020a3819a02c?"
             className="flex-1 shrink-0 w-6 aspect-square"
-          />
-          <div>Edit and details </div>
+          />}
+          <div>{hasAnyPermissionwithout("Full-Access","Update-Employee","Update-Everything")?"Edit and details":" details"} </div>
         </div>
       </button>
       </NavLink>
   
-      <button className="flex flex-col hover:bg-red-600 justify-center items-start py-4 pr-16 pl-6 w-full bg-white">
+  {
+  
+  
+  hasAnyPermissionwithout("Full-Access","Delelte-Employee","Delelte-Everything")    &&
+  <button className="flex flex-col hover:bg-red-600 justify-center items-start py-4 pr-16 pl-6 w-full bg-white">
         <div className="flex gap-2">
           <img
             loading="lazy"
@@ -215,7 +226,7 @@ return (
             
             >Delete </button>
         </div>
-      </button>
+      </button>}
     </div>}
     </Box>
 ))}
@@ -225,7 +236,7 @@ return (
 
 
 
-</Box>
+</Box>}
 
 
 

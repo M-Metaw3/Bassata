@@ -18,9 +18,9 @@ import { Box, Button } from '@chakra-ui/react';
 import { useSelector, useDispatch } from 'react-redux'
 
 import { logoutaction } from './../store/slice/logout';
+import { hasAnyPermission } from '../permissons';
 
-
-const Footer = () => {
+const Footer = ({user}) => {
   const location = useLocation()
   console.log(location.pathname)
   const [toggle, settoggle] = useState(false);
@@ -55,7 +55,8 @@ const Footer = () => {
         </Box>
       </Box>
       </NavLink>
-      <NavLink to={'/layout/customer'}>
+{hasAnyPermission(user,"Full-Access","View-Everything","View-Employee") && 
+   (   <NavLink to={'/layout/customer'}>
       <Box  fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/customer")&&'bg-rose-900 text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
         
         <Box className="flex gap-2">
@@ -67,7 +68,7 @@ const Footer = () => {
           <Box className="grow">Customers </Box>
         </Box>
       </Box>
-      </NavLink>
+      </NavLink>)}
       {/* <NavLink to={'/layout/mmf'}>
       <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/mmf")&&'bg-rose-900 text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
         <Box className="flex gap-2 w-[75px]">
@@ -80,7 +81,7 @@ const Footer = () => {
         </Box>
       </Box>
       </NavLink> */}
-      <NavLink to={'/layout/admins'}>
+     {hasAnyPermission(user,"Full-Access","View-Everything","View-Admin","Create-Admin")&&( <NavLink to={'/layout/admins'}>
       <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/admins")&&'bg-rose-900 text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
         <Box className="flex gap-2">
           <img
@@ -91,10 +92,10 @@ const Footer = () => {
           <Box className="grow">Admins</Box>
         </Box>
       </Box>
-      </NavLink>
+      </NavLink>)}
 
 
-      <NavLink to={'/layout/branches'}>
+      {hasAnyPermission(user,"Full-Access","View-Everything")&&(   <NavLink to={'/layout/branches'}>
       <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/branches")&&'bg-rose-900 text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
         <Box className="flex gap-2">
           <img
@@ -105,7 +106,7 @@ const Footer = () => {
           <Box className="grow">Branches</Box>
         </Box>
       </Box>
-      </NavLink>
+      </NavLink>)}
       {/* <NavLink to={'/layout/reports'}>
       {/* <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/reports")&&'bg-rose-900 text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
         <Box className="flex gap-2">
@@ -120,7 +121,7 @@ const Footer = () => {
       </NavLink> */} 
 
 
-      <NavLink to={'/layout/nationalit'}>
+{hasAnyPermission(user,"Full-Access","View-Everything")&&(  <NavLink to={'/layout/nationalit'}>
       <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/reports")&&'bg-rose-900 text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
         <Box className="flex gap-2">
           <img
@@ -131,8 +132,12 @@ const Footer = () => {
           <Box className="grow">Nationalit</Box>
         </Box>
       </Box>
-      </NavLink>
-      <NavLink to={'/layout/roles'}>
+      </NavLink>)}
+
+
+
+
+      {hasAnyPermission(user,"Full-Access","View-Everything")&&(    <NavLink to={'/layout/roles'}>
       <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/roles")&&'bg-rose-900 text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
         <Box className="flex gap-2">
           <img
@@ -143,7 +148,7 @@ const Footer = () => {
           <Box className="grow">Roles</Box>
         </Box>
       </Box>
-      </NavLink>
+      </NavLink>)}
       <NavLink>
       <Button  onClick={()=>dispatch(logoutaction())} _hover={{background:'red'}} backgroundColor={"transparent"} p={'30px'} className=" justify-center items-center self-center px-16 py-4 w-full text-right whitespace-nowrap rounded-2xl border border-red-600 border-solid max-w-[327px] mt-[200px]">
         Log out

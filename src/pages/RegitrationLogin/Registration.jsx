@@ -33,7 +33,7 @@ import loginimage from '../../assets/Rectangle 1.png'
 export default function Registration({isjwt,islogin}) {
   const userCookie = Cookies?.get('user');
   const user = userCookie ? JSON.parse(userCookie) : undefined;
-const nav= useNavigate()
+
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   
@@ -119,6 +119,11 @@ const nav= useNavigate()
   //    alert("an error")
   //   }
   //  };
+
+  if(user){
+ 
+    return window.location.href = "/layout";
+  } 
 
   return (
 

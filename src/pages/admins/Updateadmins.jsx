@@ -13,7 +13,8 @@ import {
 import { useParams } from 'react-router-dom';
 import {Box,useToast,Button} from '@chakra-ui/react'
 import Skeletoncomp from '../../components/Skeletoncomp';
-const Updateadmins = () => {
+import { hasAnyPermissionwithout } from '../../permissons';
+const Updateadmins = ({user}) => {
 const {id} = useParams()
 
 
@@ -192,7 +193,11 @@ if(formData?.role_id!=data?.data?.role?.id){
     }
   };
   if(isPending) return <Skeletoncomp/>
-
+  if(!user){
+ 
+    return window.location.href = "/";
+  } 
+  
   return (
     <Box alignItems={"center"} width={"90%"} my={"auto"} p={"10px"} mx={"auto"}>
       <h2 className="text-2xl font-semibold mb-4">Update admin :  { formData?.name}</h2>
@@ -302,11 +307,11 @@ if(formData?.role_id!=data?.data?.role?.id){
                   </div>
                 </label>
 
-        <Box my={"20px"} alignContent={"center"} >
+   {hasAnyPermissionwithout("Full-Access","Update-Admin","Update-Everything")&&     <Box my={"20px"} alignContent={"center"} >
             <Button isLoading={loading}    type="submit" width={"25%"}   colorScheme="teal">
             update
             </Button>
-          </Box>
+          </Box>}
       </form>
       {/* {error && <p style={{ color: 'red' }}>{error}</p>} */}
       {success && <p style={{ color: 'green' }}>{success}</p>}

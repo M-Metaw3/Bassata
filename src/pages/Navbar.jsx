@@ -4,12 +4,16 @@ import profile from '../assets/Frame (1).png'
 import { useDispatch,useSelector } from 'react-redux';
 import {openmodalcustomer } from '../store/slice/customer'
 import AddnewCustomer from './customer/AddnewCustomer';
-
+import { NavLink,useNavigate } from 'react-router-dom';
+import { hasAnyPermission } from '../permissons'
 const Navbar = ({user}) => {
 const {openmodal} = useSelector((state) => state.customer)
-
+const nav=useNavigate()
   const dispatch = useDispatch()
   console.log(user)
+  if(!user) {
+
+    return nav("/")  }
   return (
     <div>
       
@@ -29,14 +33,15 @@ const {openmodal} = useSelector((state) => state.customer)
           </Box>
         </Box>
         <Box  className="flex gap-5 justify-between items-center max-md:flex-wrap max-md:max-w-full">
-          <Button onClick={()=>dispatch(openmodalcustomer(true))} bg={"red"} p={"5%"}  className="flex gap-2.5 justify-center self-stretch px-11 py-5 my-auto text-lg text-right bg-red-600 rounded-2xl text-neutral-200 max-md:px-5">
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb8663721bc77ba949380b93cfece2400850f5c88d002b7edf43d1d6d344612a?"
-              className="w-6 aspect-square"
-            />
-            <div >Add new customer </div>
-          </Button>
+        {hasAnyPermission(user,"Full-Access","Create-Everything","Create-Employee") && (
+  <Button onClick={() => dispatch(openmodalcustomer(true))} bg={"red"} p={"5%"} className="flex gap-2.5 justify-center self-stretch px-11 py-5 my-auto text-lg text-right bg-red-600 rounded-2xl text-neutral-200 max-md:px-5">
+    <img
+      loading="lazy"
+      src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb8663721bc77ba949380b93cfece2400850f5c88d002b7edf43d1d6d344612a?"
+      className="w-6 aspect-square"
+    />
+    <div>Add new customer</div>
+  </Button>)}
   
           <div className="flex gap-1 justify-between self-stretch">
             

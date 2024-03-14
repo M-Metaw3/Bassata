@@ -37,7 +37,7 @@ import Addbranches from './Addbranches';
 import Editbranches from './Editbranches';
 import DeleteBranch from './DeleteBranch';
 import Skeletoncomp from './../../components/Skeletoncomp';
-const Branches = () => {
+const Branches = ({user}) => {
   const { isPending, error, data } = useQuery({
     queryKey: ['branches'],
     queryFn: () =>
@@ -106,7 +106,10 @@ const handeleropenedit =(id)=>{
 }
 
 if(isPending) return <Skeletoncomp/>
-
+if(!user){
+ 
+  return window.location.href = "/";
+} 
 
     return (
    <>

@@ -16,6 +16,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import {openmodalcustomer } from '../../store/slice/customer'
 import { PostDataWithImg } from '../../api/apiFactory';
 import { GetDataProtected } from './../../api/apiFactory';
+import { hasAnyPermissionwithout } from '../../permissons';
+import { Navigate } from 'react-router-dom';
 function AddnewCustomer() {
 ////   // useEffect(() => {
 //   //   // Fetch nationalities data and set it to the state
@@ -166,6 +168,10 @@ const toast = useToast();
     }
 
   };
+ if( !hasAnyPermissionwithout("Full-Access","Create-Everything","Create-Employee")){
+   
+   return window.location.href = "/layout";
+ } 
 
     return (
       <>

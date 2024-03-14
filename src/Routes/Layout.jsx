@@ -27,7 +27,7 @@ const Layout = ({x}) => {
        {/* <Box   display={condition ? { base: "block" } : { base: "none", lg: "block" }}    mr={"20px"} w={"20%"} > */}
        <Box   display={ { base: `${condition?"block":"none"}`, lg: "block" }}    mr={"20px"} w={"20%"} >
 
-<Footer/>
+<Footer user={useradmin}/>
 </Box>
    <Box  w={{base:"100%" ,lg:'80%'}}>
 

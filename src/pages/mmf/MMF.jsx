@@ -8,7 +8,7 @@ import { UpdateData,PostData,PostDataWithImg,GetDataProtected ,DeleteData} from 
 
 
 
-const MMF = () => {
+const MMF = ({user}) => {
   const [nationalities, setNationalities] = useState([]);
   const [newNationality, setNewNationality] = useState('');
 
@@ -48,7 +48,10 @@ const MMF = () => {
     }
   };
 
-
+  if(!user){
+ 
+    return window.location.href = "/";
+  }
   return (
     <Box p={4}>
       <ToastContainer />

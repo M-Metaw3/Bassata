@@ -37,8 +37,8 @@ import UpdateCustomer from './../pages/customer/UpdateCustomer';
 
 
 const Routess = () => {
-  // const userCookie = Cookies?.get('user');
-  // const user = userCookie ? JSON.parse(userCookie) : undefined;
+  const userCookieadmin = Cookies?.get('user');
+  const useradmin = userCookieadmin ? JSON.parse(userCookieadmin) : undefined;
   // const jwtCookie = Cookies?.get('user');
   // const jwt = jwtCookie ? JSON.parse(jwtCookie) : undefined;
 
@@ -61,14 +61,14 @@ const Routess = () => {
    <Route  path='/layout/roles' element={<Addrole />}/>
    <Route path='/layout/addadmin' element={<AdminView />}/>
    <Route index element={<Reports />}/>
-   <Route path='/layout/customer' element={<Customer />}/>
-   <Route path='/layout/nationalit' element={<MMF />}/>
-   <Route path='/layout/admins' element={<Admins />}>
+   <Route path='/layout/customer' element={<Customer user={useradmin} />}/>
+   <Route path='/layout/nationalit' element={<MMF user={useradmin}/>}/>
+   <Route path='/layout/admins' element={<Admins user={useradmin} />}>
    </Route>
 
    {/* <Route path='/layout/reports' element={<Reports />}/> */}
 
-   <Route path='/layout/branches' element={<Branches />}/>
+   <Route path='/layout/branches' element={<Branches user={useradmin}/>}/>
 
 
 
@@ -83,13 +83,13 @@ const Routess = () => {
 
    
    
-   <Route path='/layout/customer/:id' element={<UpdateCustomer />}/>
+   <Route path='/layout/customer/:id' element={<UpdateCustomer user={useradmin} />}/>
 
 
 
 
 
-   <Route path='/layout/admins/:id' element={<Updateadmins />}/>
+   <Route path='/layout/admins/:id' element={<Updateadmins user={useradmin} />}/>
 
 
 

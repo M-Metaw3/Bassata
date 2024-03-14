@@ -23,7 +23,8 @@ import {
 import { PostDataWithImg,GetDataProtected ,UpdateDataWithImg} from '../../api/apiFactory';
   
   import Skeletoncomp from '../../components/Skeletoncomp';
-const UpdateCustomer = () => {
+import { hasAnyPermissionwithout } from '../../permissons';
+const UpdateCustomer = ({user}) => {
 const {id} = useParams()
 
     const { isPending, error, data } = useQuery({
@@ -200,7 +201,11 @@ const {id} = useParams()
 
       if(isPending) return <Skeletoncomp/>
 
-    
+      if(!user){
+ 
+        return window.location.href = "/";
+      } 
+      
     return (
         <Box p={{base:"30px"}} textAlign={"center"}>
      <Text mb={"30px"} fontSize={"4rem"} >Update : {data?.data?.name}</Text>
@@ -438,12 +443,14 @@ const {id} = useParams()
                   </div>
                 </label>
     </Box>
-    <Box m={"20px"} alignContent={"center"} >
+ {
+ !hasAnyPermissionwithout("Full-Access","Update-Employee ","Update-Everything")&&
+ <Box m={"20px"} alignContent={"center"} >
             <Button isLoading={loading}    onClick={()=>onSubmit()} width={"25%"}  type="submit" colorScheme="teal">
             update
             </Button>
     
-          </Box>
+          </Box>}
         </Box>
     );
 }

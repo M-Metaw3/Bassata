@@ -34,8 +34,9 @@ import Cardaddadmin from '../../components/Cardaddadmin';
 import { NavLink } from 'react-router-dom';
 import DeleteAdmin from './DeleteAdmin';
 import Skeletoncomp from './../../components/Skeletoncomp';
+import { hasAnyPermissionwithout } from '../../permissons';
 
-const Admins = () => {
+const Admins = ({user}) => {
 
 
   const { isPending, error, data } = useQuery({
@@ -109,11 +110,13 @@ dispatch(editadmin(use))
     const sizes = ['xs', 'sm', 'md', 'lg', 'xl', 'full']
 
    
-  
 
 
     if(isPending) return <Skeletoncomp/>
-
+    if(!user){
+   
+      return window.location.href = "/";
+    } 
     
     return (
         <>
@@ -173,11 +176,15 @@ dispatch(editadmin(use))
 
 
         <div className="flex flex-col">
-        <div className="flex gap-5 justify-between px-5 w-full max-md:flex-wrap max-md:max-w-full">
-          <div className="flex-auto my-auto text-2xl leading-5 text-black">
+      <div className="flex gap-5 justify-between px-5 w-full max-md:flex-wrap max-md:max-w-full">
+   {
+    hasAnyPermissionwithout("Full-Access","View-Admin","View-Everything")&&
+    <div className="flex-auto my-auto text-2xl leading-5 text-black">
           Admins : <span style={{color:"red"}}>{data?.data?.length}</span>
-          </div>
-          <button  
+          </div>}
+         { 
+         
+         hasAnyPermissionwithout("Full-Access","Create-Everything","Create-Admin")&&<button  
              onClick={() => handleClick(size)}
              className="flex gap-2.5 justify-between px-11 py-5 text-lg text-right whitespace-nowrap hover:bg-red-500 bg-red-700 rounded-2xl text-neutral-200 max-md:px-5">
             <img
@@ -190,9 +197,9 @@ dispatch(editadmin(use))
        
             
             className="grow self-start">Add new admin </div>
-          </button>
+          </button>}
         </div>
-        <Box  className="flex flex-col justify-center px-3.5 py-3.5 mt-4 w-full bg-white border-b border-solid border-b-[color:var(--Gray-Gray-2,#C9C9C9)] max-md:max-w-full">
+    {    hasAnyPermissionwithout("Full-Access","View-Admin","View-Everything")&&    <Box  className="flex flex-col justify-center px-3.5 py-3.5 mt-4 w-full bg-white border-b border-solid border-b-[color:var(--Gray-Gray-2,#C9C9C9)] max-md:max-w-full">
           <Box  className="flex gap-5 justify-between w-full max-md:flex-wrap max-md:max-w-full">
             <Box  width={"97%"} className="flex gap-0 text-lg font-bold leading-7 text-red-600 capitalize max-md:flex-wrap max-md:max-w-full">
               <Box width={'16.5%'} fontSize={{base:"0.8rem",lg:"1rem"}} className=" justify-center items-start py-5 pr-10 pl-4 whitespace-wrap max-md:pr-5">
@@ -241,7 +248,7 @@ dispatch(editadmin(use))
        
            }
      
-        </Box>
+        </Box>}
 
 
 
@@ -249,7 +256,10 @@ dispatch(editadmin(use))
 
 
 
-        {data&&data?.data?.map((user) => (       <Box cursor={"pointer"} zIndex={"0"} _hover={{bg:'red.200',transition:"0.5s"}} className="flex flex-col justify-center px-3.5 py-3.5 w-full text-lg leading-7 text-black capitalize bg-white max-md:max-w-full">
+        {data&&data?.data?.map((user) => (      
+        <>
+   {    hasAnyPermissionwithout("Full-Access","View-Admin","View-Everything")&&      
+        <Box cursor={"pointer"} zIndex={"0"} _hover={{bg:'red.200',transition:"0.5s"}} className="flex flex-col justify-center px-3.5 py-3.5 w-full text-lg leading-7 text-black capitalize bg-white max-md:max-w-full">
           <Box  className="flex  justify-between pr-2.5 w-full max-md:flex-wrap max-md:max-w-full">
             <Box  width={"97%"}  className="flex gap-0 max-md:flex-wrap max-md:max-w-full">
             <Box width={'16.5%'} fontSize={{base:"0.7rem",lg:"1rem"}} className=" justify-center items-start py-5 pr-10 pl-4 whitespace-wrap max-md:pr-5">
@@ -287,19 +297,19 @@ dispatch(editadmin(use))
           </Box>
           { edits && editingUserId === user.id && <Box zIndex={"3"} className="flex relative  left-[85%] flex-col text-lg rounded-2xl shadow-sm max-w-[230px] text-neutral-700">
             <NavLink to={`/layout/admins/${user?.id}`}>
-      <button onClick={()=>handeleredit(user)} className="flex flex-col justify-center hover:bg-red-600 items-start py-4 pr-16 pl-6 w-full bg-white">
+    {    hasAnyPermissionwithout("Full-Access","Update-Admin","Update-Everything")&&   <button onClick={()=>handeleredit(user)} className="flex flex-col justify-center hover:bg-red-600 items-start py-4 pr-16 pl-6 w-full bg-white">
         <div className="flex gap-2  w-[160px]">
-          <img
+      { hasAnyPermissionwithout("Full-Access","Update-Admin","Update-Everything")&&   <img
             loading="lazy"
             src="https://cdn.builder.io/api/v1/image/assets/TEMP/358746b37b4522e3a18dca93d87bba09783b2bff6bd1ded5a183020a3819a02c?"
             className="flex-1 shrink-0 w-6 aspect-square"
-          />
-          <div>Edit and details </div>
+          />}
+          <div>{hasAnyPermissionwithout("Full-Access","Update-Admin","Update-Everything")?"Edit and details":"details"} </div>
         </div>
-      </button>
+      </button>}
       </NavLink>
      
-      <button className="flex flex-col hover:bg-red-600 justify-center items-start py-4 pr-16 pl-6 w-full bg-white">
+   {hasAnyPermissionwithout("Full-Access","Delelte-Everything","Delelte-Admin")&&   <button className="flex flex-col hover:bg-red-600 justify-center items-start py-4 pr-16 pl-6 w-full bg-white">
         <div className="flex gap-2">
           <img
             loading="lazy"
@@ -310,9 +320,11 @@ dispatch(editadmin(use))
             
             >Delete </button>
         </div>
-      </button>
+      </button>}
     </Box>}
-        </Box>))}
+          
+        </Box>
+        }</>  ))}
 
 
 
