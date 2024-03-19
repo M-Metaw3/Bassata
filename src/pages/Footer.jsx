@@ -149,8 +149,8 @@ const Footer = ({user}) => {
         </Box>
       </Box>
       </NavLink>)}
-      {hasAnyPermission(user,"Full-Access","View-Everything")&&(    <NavLink to={'/layout/reports'}>
-      <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/reports")&&' bg-red-800 text-white text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
+      {hasAnyPermission(user,"Full-Access","View-Everything")&&(    <NavLink to={'/layout/report'}>
+      <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/report")&&' bg-red-800 text-white text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
         <Box className="flex gap-2">
           <img
             loading="lazy"
