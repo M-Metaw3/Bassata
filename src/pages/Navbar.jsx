@@ -34,14 +34,18 @@ const nav=useNavigate()
         </Box>
         <Box  className="flex gap-5 justify-between items-center max-md:flex-wrap max-md:max-w-full">
         {hasAnyPermission(user,"Full-Access","Create-Everything","Create-Employee") && (
-  <Button onClick={() => dispatch(openmodalcustomer(true))} bg={"red"} p={"7%"} className="flex gap-2.5 justify-center  px-11 py-5 my-auto text-lg text-right bg-red-600 rounded-2xl text-neutral-200 max-md:px-5">
+<NavLink to={'/layout/B'}>
+
+  <Button  bg={"red"}  className="flex gap-2.5 justify-center  px-11 py-4 my-auto text-lg text-right bg-red-600 rounded-2xl text-neutral-200 max-md:px-5">
     <img
       loading="lazy"
       src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb8663721bc77ba949380b93cfece2400850f5c88d002b7edf43d1d6d344612a?"
       className="w-6 aspect-square"
     />
     <div className='p-2'>Add new customer</div>
-  </Button>)}
+  </Button>
+</NavLink>
+  )}
   
           <div className="flex gap-1 justify-between self-stretch">
             

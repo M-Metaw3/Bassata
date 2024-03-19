@@ -106,7 +106,17 @@ return (
  {  hasAnyPermissionwithout("Full-Access","View-Everything","View-Employee")&&(   <Box  className="flex-auto my-auto text-2xl leading-5 text-black">
         Customers : <span style={{color:"red"}}>{data?.data?.length}</span>
       </Box>)}
-    { hasAnyPermissionwithout("Full-Access","Create-Everything","Create-Employee")&& <button onClick={()=>dispatch(openmodalcustomer(true))} className="flex hover:bg-red-500  hover:transition-2s gap-2.5 justify-center px-11 py-5 text-lg text-right whitespace-nowrap bg-red-600 rounded-2xl text-neutral-200 max-md:px-5">
+    {/* { hasAnyPermissionwithout("Full-Access","Create-Everything","Create-Employee")&& <button onClick={()=>dispatch(openmodalcustomer(true))} className="flex hover:bg-red-500  hover:transition-2s gap-2.5 justify-center px-11 py-4 text-lg text-right whitespace-nowrap bg-red-600 rounded-2xl text-neutral-200 max-md:px-5">
+        <img
+          loading="lazy"
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb8663721bc77ba949380b93cfece2400850f5c88d002b7edf43d1d6d344612a?"
+          className="shrink-0 w-6 aspect-square"
+        />
+        <div className="grow my-auto">Add new customer </div>
+      </button>} */}
+
+<NavLink to={'/layout/B'}>
+{ hasAnyPermissionwithout("Full-Access","Create-Everything","Create-Employee")&& <button  className="flex hover:bg-red-500  hover:transition-2s gap-2.5 justify-center px-11 py-4 text-lg text-right whitespace-nowrap bg-red-600 rounded-2xl text-neutral-200 max-md:px-5">
         <img
           loading="lazy"
           src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb8663721bc77ba949380b93cfece2400850f5c88d002b7edf43d1d6d344612a?"
@@ -114,6 +124,7 @@ return (
         />
         <div className="grow my-auto">Add new customer </div>
       </button>}
+      </NavLink>
 </Box>
 
 
@@ -163,9 +174,11 @@ return (
 
 
 
-{hasAnyPermissionwithout("Full-Access","View-Everything","View-Employee")&&<Box >
-{data?.data?.map((el)=>(
+{/* {hasAnyPermissionwithout("Full-Access","View-Everything","View-Employee")&&<Box >
+{data?.data?.map((el)=>
+  
   <Box cursor={"pointer"}   _hover={{bg:"red.200",transition:'0.7s'}} className="flex flex-col justify-center px-3.5 py-3.5 text-lg leading-7 text-black capitalize bg-white">
+
       <Box  className="flex gap-5 justify-between pr-2.5 w-full max-md:flex-wrap max-md:max-w-full">
         <Box width={"90%"} className="flex gap-0 max-md:flex-wrap max-md:max-w-full">
           <Box  width={"19%"} fontSize={{base:"0.8rem",lg:'1rem'}}  className=" justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
@@ -177,14 +190,14 @@ return (
           <Box width={"19%"} fontSize={{base:"0.8rem",lg:'1rem'}}  className=" justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
             {el?.phone_number}
           </Box>
-          <Box width={"19%"} fontSize={{base:"0.8rem",lg:'1rem'}}  className=" justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
-            {el?.initial_balance}${" "}
+          <Box width={"19%"}  style={{filter:' blur(5px)'}} fontSize={{base:"0.8rem",lg:'1rem'}}  className=" justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
+            333333${" "}
           </Box>
           <Box width={"19%"} fontSize={{base:"0.8rem",lg:'1rem'}}  className="justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
             {el?.personal_id}
           </Box>
         </Box>
-        <button onClick={() => handleEditClick(el.id)}>
+        <button >
 
         <img
           loading="lazy"
@@ -194,7 +207,7 @@ return (
             </button>
 
       </Box>
-      { edits && editingUserId === el.id && <div className="flex relative  left-[85%] flex-col text-lg rounded-2xl shadow-sm max-w-[230px] text-neutral-700">
+      {/* { edits && editingUserId === el.id && <div className="flex relative  left-[85%] flex-col text-lg rounded-2xl shadow-sm max-w-[230px] text-neutral-700">
             <NavLink to={`/layout/customer/${el?.id}`}>
       <button 
       // onClick={()=>handeleredit(el)} 
@@ -227,20 +240,58 @@ return (
             >Delete </button>
         </div>
       </button>}
-    </div>}
-    </Box>
-))}
+    </div>} */}
+
+    {/* </Box> */}
+{/* ))} */} 
 
 
 
 
 
 
-</Box>}
+{/* </Box> */}
+          {/* } */}
 
 
 
 
+          {hasAnyPermissionwithout("Full-Access","View-Everything","View-Employee") && (
+  <Box>
+    {data?.data?.map((el) => (
+      <NavLink key={el?.id} to={`/layout/customer/${el?.id}`}>
+        <Box cursor={"pointer"} _hover={{ bg: "red.200", transition: '0.7s' }} className="flex flex-col justify-center px-3.5 py-3.5 text-lg leading-7 text-black capitalize bg-white">
+          <Box className="flex gap-5 justify-between pr-2.5 w-full max-md:flex-wrap max-md:max-w-full">
+            <Box width={"90%"} className="flex gap-0 max-md:flex-wrap max-md:max-w-full">
+              <Box width={"19%"} fontSize={{ base: "0.8rem", lg: '1rem' }} className="justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
+                {el?.name} {" "}
+              </Box>
+              <Box width={"19%"} fontSize={{ base: "0.8rem", lg: '1rem' }} className="justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
+                {el?.type}{" "}
+              </Box>
+              <Box width={"19%"} fontSize={{ base: "0.8rem", lg: '1rem' }} className="justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
+                {el?.phone_number}
+              </Box>
+              <Box width={"19%"} style={{ filter: ' blur(5px)' }} fontSize={{ base: "0.8rem", lg: '1rem' }} className="justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
+                333333$
+              </Box>
+              <Box width={"19%"} fontSize={{ base: "0.8rem", lg: '1rem' }} className="justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">
+                {el?.personal_id}
+              </Box>
+            </Box>
+            <button>
+              <img
+                loading="lazy"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/dbb154ed7b6f9a540c841ab96df16db8d45d14d0d0f5e85aee515d4f634473fa?"
+                className="shrink-0 my-auto w-6 aspect-square"
+              />
+            </button>
+          </Box>
+        </Box>
+      </NavLink>
+    ))}
+  </Box>
+)}
 
 
 

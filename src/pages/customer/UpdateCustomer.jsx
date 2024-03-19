@@ -218,6 +218,7 @@ const {id} = useParams()
           <FormControl w={"100%"} >
             <FormLabel>Name</FormLabel>
             <Input
+            readOnly
               type="text"
               value={daata?.name}
               onChange={(e) => setData({ ...daata, name: e.target.value })}
@@ -228,6 +229,8 @@ const {id} = useParams()
           <FormControl>
             <FormLabel>Email</FormLabel>
             <Input
+            readOnly
+
               type="email"
               value={daata?.email}
               onChange={(e) => setData({ ...daata, email: e.target.value })}
@@ -238,6 +241,8 @@ const {id} = useParams()
           <FormControl>
             <FormLabel>Personal ID</FormLabel>
             <Input
+            readOnly
+
               type="text"
               value={daata?.personal_id}
               onChange={(e) => setData({ ...daata, personal_id: e.target.value })}
@@ -248,6 +253,7 @@ const {id} = useParams()
           <FormControl>
             <FormLabel>Type</FormLabel>
             <Select
+            readOnly
             _placeholder={daata?.type}
               value={daata?.type}
               onChange={(e) => setData({ ...daata, type: e.target.value })}
@@ -255,8 +261,8 @@ const {id} = useParams()
             >
               <option value={daata?.type}>{daata?.type}</option>
 
-              <option value="cooperate">cooperate</option>
-              <option value="individual">individual</option>
+              {/* <option value="cooperate">cooperate</option>
+              <option value="individual">individual</option> */}
             </Select>
           </FormControl>
 
@@ -279,7 +285,9 @@ const {id} = useParams()
           <FormControl>
             <FormLabel>Phone number</FormLabel>
             <Input
-              type="email"
+            readOnly
+
+              type="text"
               value={daata?.phone_number}
               onChange={(e) => setData({ ...daata, phone_number: e.target.value })}
               required
@@ -289,6 +297,8 @@ const {id} = useParams()
           <FormControl>
             <FormLabel>Intial Balance</FormLabel>
             <Input
+            readOnly
+
               type="text"
               value={daata?.initial_balance}
               onChange={(e) => setData({ ...daata, initial_balance: e.target.value })}
@@ -324,9 +334,9 @@ const {id} = useParams()
 
 
 <label
-                  onDragOver={(e) => handleDragOver(e)}
-                  onDrop={(e) => handleDrop(e, setFile1, setFileName1)
-                }
+        //  onDragOver={(e) => handleDragOver(e)}
+        //           onDrop={(e) => handleDrop(e, setFile1, setFileName1)
+        //         }
                   htmlFor="fileInput1"
 
                   className="flex justify-center items-center px-16 py-5 mt-6 w-full whitespace-nowrap rounded-xl border-2 border-dashed border-neutral-700 max-w-[720px] max-md:px-5 max-md:max-w-full"
@@ -351,6 +361,8 @@ const {id} = useParams()
                     )}
                     {/* File input */}
                     <input
+            readOnly
+
                       type="file"
                       id="fileInput1"
                       accept=".jpg, .jpeg, .png"
@@ -392,6 +404,8 @@ const {id} = useParams()
                     )}
                     {/* File input */}
                     <input
+            readOnly
+
                       type="file"
                       id="fileInput2"
                       accept=".jpg, .jpeg, .png"
@@ -431,6 +445,8 @@ const {id} = useParams()
                     )}
                     {/* File input */}
                     <input
+            readOnly
+
                       type="file"
                       id="fileInput3"
                       accept=".jpg, .jpeg, .png"

@@ -34,6 +34,8 @@ import Branches from '../pages/branches/Branches';
 import Reports from './../pages/reports/Reports';
 import Updateadmins from './../pages/admins/Updateadmins';
 import UpdateCustomer from './../pages/customer/UpdateCustomer';
+import AddnewCustomer from '../pages/customer/AddnewCustomer';
+import Addnewbassta from '../pages/customer/Addnewbassta';
 
 
 const Routess = () => {
@@ -62,11 +64,11 @@ const Routess = () => {
    <Route path='/layout/addadmin' element={<AdminView />}/>
    <Route index element={<Reports />}/>
    <Route path='/layout/customer' element={<Customer user={useradmin} />}/>
-   <Route path='/layout/nationalit' element={<MMF user={useradmin}/>}/>
+   <Route path='/layout/mmf' element={<MMF user={useradmin}/>}/>
    <Route path='/layout/admins' element={<Admins user={useradmin} />}>
    </Route>
 
-   {/* <Route path='/layout/reports' element={<Reports />}/> */}
+   <Route path='/layout/reports' element={<Reports />}/>
 
    <Route path='/layout/branches' element={<Branches user={useradmin}/>}/>
 
@@ -78,6 +80,9 @@ const Routess = () => {
 
    <Route path='/layout/add' element={< Addadmin/>}/>
    <Route path='/layout/viewadmns' element={< Viewadmin/>}/>
+   <Route path='/layout/B' element={< Addnewbassta/>}/>
+
+
 
 
 

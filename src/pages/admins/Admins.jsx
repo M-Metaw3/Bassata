@@ -186,7 +186,7 @@ dispatch(editadmin(use))
          
          hasAnyPermissionwithout("Full-Access","Create-Everything","Create-Admin")&&<button  
              onClick={() => handleClick(size)}
-             className="flex gap-2.5 justify-between px-11 py-5 text-lg text-right whitespace-nowrap hover:bg-red-500 bg-red-700 rounded-2xl text-neutral-200 max-md:px-5">
+             className="flex gap-2.5 justify-between px-11 py-4 text-lg text-right whitespace-nowrap hover:bg-red-500 bg-red-700 rounded-2xl text-neutral-200 max-md:px-5">
             <img
               loading="lazy"
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb8663721bc77ba949380b93cfece2400850f5c88d002b7edf43d1d6d344612a?"

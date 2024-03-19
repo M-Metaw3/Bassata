@@ -84,7 +84,7 @@ console.log(data.profile[0])
     dataa.append('profile', data.profile[0]);
     try {
 
-
+console.log(dataa)
 
 
 

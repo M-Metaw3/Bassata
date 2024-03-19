@@ -30,7 +30,7 @@ const Footer = ({user}) => {
   const dispatch = useDispatch()
 
   const isActive = (path) => {
-    
+    console.log(location.pathname === path)
     return location.pathname === path;
   };
   return (
@@ -44,7 +44,7 @@ const Footer = ({user}) => {
       />
       </NavLink>
       <NavLink to={'/layout'}>
-      <Box   fontSize={{base:"0.8rem",md:'1.2rem'}}  p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-10 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout")&&'bg-rose-900 text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
+      <Box   fontSize={{base:"0.8rem",md:'1.2rem'}}  p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-10 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout")&&' bg-red-800 text-red-600 border-solid text-white border-r-[5px] border-r-red-600'}`}>
         <Box className="flex gap-2">
           <img
             loading="lazy"
@@ -57,7 +57,7 @@ const Footer = ({user}) => {
       </NavLink>
 {hasAnyPermission(user,"Full-Access","View-Everything","View-Employee") && 
    (   <NavLink to={'/layout/customer'}>
-      <Box  fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/customer")&&'bg-rose-900 text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
+      <Box  fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/customer")&&'  border-solid border-r-[5px] text-white bg-red-800 border-r-red-600'}`}>
         
         <Box className="flex gap-2">
           <img
@@ -82,7 +82,7 @@ const Footer = ({user}) => {
       </Box>
       </NavLink> */}
      {hasAnyPermission(user,"Full-Access","View-Everything","View-Admin","Create-Admin")&&( <NavLink to={'/layout/admins'}>
-      <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/admins")&&'bg-rose-900 text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
+      <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/admins")&&' bg-red-800 text-red-600 text-white border-solid border-r-[5px] border-r-red-600'}`}>
         <Box className="flex gap-2">
           <img
             loading="lazy"
@@ -96,7 +96,7 @@ const Footer = ({user}) => {
 
 
       {hasAnyPermission(user,"Full-Access","View-Everything")&&(   <NavLink to={'/layout/branches'}>
-      <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/branches")&&'bg-rose-900 text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
+      <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/branches")&&' bg-red-800 text-red-600 text-white border-solid border-r-[5px] border-r-red-600'}`}>
         <Box className="flex gap-2">
           <img
             loading="lazy"
@@ -121,15 +121,15 @@ const Footer = ({user}) => {
       </NavLink> */} 
 
 
-{hasAnyPermission(user,"Full-Access","View-Everything")&&(  <NavLink to={'/layout/nationalit'}>
-      <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/nationalit")&&'bg-rose-900 text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
+{hasAnyPermission(user,"Full-Access","View-Everything")&&(  <NavLink to={'/layout/mmf'}>
+      <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/mmf")&&' bg-red-800 text-white text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
         <Box className="flex gap-2">
           <img
             loading="lazy"
             src={branches}
             className="w-6 aspect-square"
           />
-          <Box className="grow">Nationalit</Box>
+          <Box className="grow">MMF</Box>
         </Box>
       </Box>
       </NavLink>)}
@@ -138,7 +138,7 @@ const Footer = ({user}) => {
 
 
       {hasAnyPermission(user,"Full-Access","View-Everything")&&(    <NavLink to={'/layout/roles'}>
-      <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/roles")&&'bg-rose-900 text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
+      <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/roles")&&' bg-red-800 text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
         <Box className="flex gap-2">
           <img
             loading="lazy"
@@ -146,6 +146,18 @@ const Footer = ({user}) => {
             className="w-6 aspect-square"
           />
           <Box className="grow">Roles</Box>
+        </Box>
+      </Box>
+      </NavLink>)}
+      {hasAnyPermission(user,"Full-Access","View-Everything")&&(    <NavLink to={'/layout/reports'}>
+      <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/reports")&&' bg-red-800 text-white text-red-600 border-solid border-r-[5px] border-r-red-600'}`}>
+        <Box className="flex gap-2">
+          <img
+            loading="lazy"
+            src={branches}
+            className="w-6 aspect-square"
+          />
+          <Box className="grow">Reports</Box>
         </Box>
       </Box>
       </NavLink>)}
