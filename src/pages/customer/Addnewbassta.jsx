@@ -127,6 +127,13 @@ const Addnewbassta = () => {
         
         <Field type="file" name="contractUrl" className=" form-control" />
       </div>
+      <div className="col-md-6 mt-3">
+
+      <h6>Upload KYC</h6>
+        
+        <Field type="file" name="contractUrl" className=" form-control" />
+      </div>
+             
              {/* {image&& <img src={URL.createObjectURL(image)}/>} */}
               {/* Gender Dropdown */}
               <div className="col-md-6 mt-3">
@@ -158,12 +165,12 @@ const Addnewbassta = () => {
               </div>
 
               {/* Checkbox for isExpired */}
-              {/* <div className="col-12 mt-3">
-                <div className="form-check">
+              <div className="col-12 mt-3">
+                {/* <div className="form-check">
                   <Field type="checkbox" name="isExpired" className="form-check-input" id="isExpiredCheckbox" />
                   <label className="form-check-label" htmlFor="isExpiredCheckbox">Is Expired</label>
-                </div>
-              </div> */}
+                </div> */}
+              </div>
             </div>
             
             <Button type="submit" _hover={{bg:"red.400"}} className="btn btn-primary mt-4">Submit</Button>
