@@ -63,6 +63,8 @@ const Addnewbassta = () => {
           backImageUrl: "",
           faceImageUrl: "",
           contractUrl: ""
+          kyc: ""
+
         }}
         onSubmit={(values) => {
           console.log(values);
@@ -131,7 +133,7 @@ const Addnewbassta = () => {
 
       <h6>Upload KYC</h6>
         
-        <Field type="file" name="contractUrl" className=" form-control" />
+        <Field type="file" name="kyc" className=" form-control" />
       </div>
              
              {/* {image&& <img src={URL.createObjectURL(image)}/>} */}
