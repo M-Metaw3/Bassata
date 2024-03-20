@@ -62,7 +62,7 @@ const Addnewbassta = () => {
           frontImageUrl: "",
           backImageUrl: "",
           faceImageUrl: "",
-          contractUrl: ""
+          contractUrl: "",
           kyc: ""
 
         }}
