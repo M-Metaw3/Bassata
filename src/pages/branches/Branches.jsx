@@ -141,7 +141,7 @@ if(!user){
         </div>
         <button
           onClick={() => handleClick(size)}
-          className="flex hover:bg-red-500 gap-2.5 justify-between px-11 py-5 text-lg text-right whitespace-nowrap bg-red-700 rounded-2xl text-neutral-200 max-md:px-5"
+          className="flex hover:bg-red-500 gap-2.5 justify-between px-11 py-4 text-lg text-right whitespace-nowrap bg-red-700 rounded-2xl text-neutral-200 max-md:px-5"
         >
           <img
             loading="lazy"
