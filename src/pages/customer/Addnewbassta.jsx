@@ -70,67 +70,67 @@ const Addnewbassta = () => {
         }}
       >
         <Form>
-          <div className="row">
+          <div className="capitalize row">
               {/*Provide input fields for all details as specified in your data structure*/}
-              {['nationalId',
-                'email',
-                'mobilePhone',
-                'nameEn',
-                'nameAr',
-                'birthdate',
-                'addressEn',
-                'addressAr',
-                'jobTitle',
-                'issuedDate',
-                'expirationDate',
+              {['National ID',
+                'Email',
+                'mobile Phone',
+                'name En',
+                'name Ar',
+                'birth date',
+                'address En',
+                'address Ar',
+                'job Title',
+                'ID issued Date',
+                'ID expiration Date',
                 'status',
-                'familyNameEn',
-                'familyNameAr',
-                'addressDetailsEn',
-                'addressDetailsAr',
-                'streetEn',
-                'streetAr',
-                'subDistrictEn',
-                'subDistrictAr',
-                'districtEn',
-                'districtAr',
-                'governorateEn',
-                'governorateAr',
-                'serialNumber',
-                'birthGovernorateEn',
-                'birthGovernorateAr',
-                'jobPlace',
+                'family Name En',
+                'family Name Ar',
+                'address Details En',
+                'address Details Ar',
+                'street En',
+                'street Ar',
+                'subDistrict En',
+                'subDistrict Ar',
+                'district En',
+                'district Ar',
+                'governorate En',
+                'governorate Ar',
+                'serial Number',
+                'birth GovernorateEn',
+                'birth GovernorateAr',
+                'job Place',
                 'husband',
                 ].map((fieldName, index) => (
-                <div key={index} className="col-md-6 mt-3">
-                  <h1>{fieldName}</h1>
+                <div key={index} className="capitalize-first col-md-6 mt-3">
+                  <h1 className='capitalize-first'>{fieldName}</h1>
                   <Field name={fieldName} className="form-control" placeholder={fieldName} />
                 </div>
               ))}
                     <div className="col-md-6 mt-3">
-                      <h6>frontImageUrl</h6>
+                      <h6>    ID front Image Url</h6>
         <Field  type="file"  name="frontImageUrl" className="form-control" />
 
       </div>
       <div className="col-md-6 mt-3">
-      <h6>backImageUrl</h6>
+      <h6> ID back Image Url</h6>
 
         <Field type="file"  name="backImageUrl" className="form-control" />
       </div>
       <div className="col-md-6 mt-3">
-      <h6>faceImageUrl</h6>
+      <h6>     Face Image Url</h6>
 
         <Field type="file" name="faceImageUrl" className="form-control" />
       </div>
       <div className="col-md-6 mt-3">
-      <h6>others</h6>
+      <h6>contract Url</h6>
         
-        <Field type="file" name="contractUrl" className="form-control" />
+        <Field type="file" name="contractUrl" className=" form-control" />
       </div>
              {/* {image&& <img src={URL.createObjectURL(image)}/>} */}
               {/* Gender Dropdown */}
               <div className="col-md-6 mt-3">
-                <Field as="select" name="gender" className="form-select">
+                <Field as="select" name="gender" className=" capitalize form-select">
                   <option value="" label="Select gender" />
                   <option value="ذكر" label="Male" />
                   <option value="أنثى" label="Female" />
@@ -139,7 +139,7 @@ const Addnewbassta = () => {
 
               {/* Marital Status Dropdown */}
               <div className="col-md-6 mt-3">
-                <Field as="select" name="maritalStatus" className="form-select">
+                <Field as="select" name="maritalStatus" className="capitalize form-select">
                   <option value="" label="Select marital status" />
                   <option value="Single" label="Single" />
                   <option value="Married" label="Married" />
@@ -149,7 +149,7 @@ const Addnewbassta = () => {
 
               {/* Religion Dropdown */}
               <div className="col-md-6 mt-3">
-                <Field as="select" name="religion" className="form-select">
+                <Field as="select" name="religion" className="capitalize form-select">
                   <option value="" label="Select religion" />
                   <option value="Islam" label="Islam" />
                   <option value="Christianity" label="Christianity" />
@@ -158,12 +158,12 @@ const Addnewbassta = () => {
               </div>
 
               {/* Checkbox for isExpired */}
-              <div className="col-12 mt-3">
+              {/* <div className="col-12 mt-3">
                 <div className="form-check">
                   <Field type="checkbox" name="isExpired" className="form-check-input" id="isExpiredCheckbox" />
                   <label className="form-check-label" htmlFor="isExpiredCheckbox">Is Expired</label>
                 </div>
-              </div>
+              </div> */}
             </div>
             
             <Button type="submit" _hover={{bg:"red.400"}} className="btn btn-primary mt-4">Submit</Button>

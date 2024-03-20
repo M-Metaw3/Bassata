@@ -259,7 +259,7 @@ dispatch(editadmin(use))
         {data&&data?.data?.map((user) => (      
         <>
    {    hasAnyPermissionwithout("Full-Access","View-Admin","View-Everything")&&      
-        <Box cursor={"pointer"} zIndex={"0"} _hover={{bg:'red.200',transition:"0.5s"}} className="flex flex-col justify-center px-3.5 py-3.5 w-full text-lg leading-7 text-black capitalize bg-white max-md:max-w-full">
+        <Box cursor={"pointer"} zIndex={"0"} _hover={{bg:'red.200',transition:"0.5s"}} className="flex flex-col justify-center px-3.5 py-3.5 w-full text-lg leading-7 text-black capitalize max-md:max-w-full">
           <Box  className="flex  justify-between pr-2.5 w-full max-md:flex-wrap max-md:max-w-full">
             <Box  width={"97%"}  className="flex gap-0 max-md:flex-wrap max-md:max-w-full">
             <Box width={'16.5%'} fontSize={{base:"0.7rem",lg:"1rem"}} className=" justify-center items-start py-5 pr-10 pl-4 whitespace-wrap max-md:pr-5">

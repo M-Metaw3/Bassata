@@ -258,9 +258,9 @@ return (
 
           {hasAnyPermissionwithout("Full-Access","View-Everything","View-Employee") && (
   <Box>
-    {data?.data?.map((el) => (
+    {data?.data?.map((el) => (      
       <NavLink key={el?.id} to={`/layout/customer/${el?.id}`}>
-        <Box cursor={"pointer"} _hover={{ bg: "red.200", transition: '0.7s' }} className="flex flex-col justify-center px-3.5 py-3.5 text-lg leading-7 text-black capitalize bg-white">
+        <Box cursor={"pointer"}  _hover={{ bg: "red.300", transition: '0.7s' }}  className="flex flex-col justify-center px-3.5 py-3.5 text-lg leading-7 text-black capitalize">
           <Box className="flex gap-5 justify-between pr-2.5 w-full max-md:flex-wrap max-md:max-w-full">
             <Box width={"90%"} className="flex gap-0 max-md:flex-wrap max-md:max-w-full">
               <Box width={"19%"} fontSize={{ base: "0.8rem", lg: '1rem' }} className="justify-center items-center lg:pr-16 py-5 pr-4 pl-4 max-md:pr-5">

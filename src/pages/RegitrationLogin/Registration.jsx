@@ -232,7 +232,7 @@ export default function Registration({isjwt,islogin}) {
             <div className="mt-8 mr-3 text-2xl max-md:mr-2.5 max-md:max-w-full">
               Please enter your user name and password
             </div>
-            <div className="justify-center items-start py-5 pr-16 pl-5 mt-8 whitespace-nowrap rounded-2xl border border-solid border-[color:var(--Gray-Gray-4,#838383)] text-zinc-400 max-md:pr-5 max-md:max-w-full">
+            <div className="justify-center items-start py-3 pr-16 pl-5 mt-8 whitespace-nowrap rounded-2xl border border-solid border-[color:var(--Gray-Gray-4,#838383)] text-zinc-400 max-md:pr-5 max-md:max-w-full">
             <input
              type="text"
              name="email" value={formData.email} onChange={handleChange}  
