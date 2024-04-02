@@ -9,6 +9,7 @@ import { Navigate } from 'react-router-dom';
 
 const Addnewbassta = () => {
   const { accessToken, handleRefreshToken } = useAuth();
+
 console.log(accessToken)
   const toast = useToast();
 const [load,setload]=useState(false)
@@ -211,7 +212,7 @@ const [load,setload]=useState(false)
       <input class="w-full border rounded-md py-2 px-3" type="file" id="kycForm" name="kycFormUrl" onChange={handleFileChange} />
       </Box>
     </Box>
-      <Button width={'full'} bg={'red'} _hover={{bg:'red.500'}} isLoading={load} class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Submit</Button>
+      <Button width={'full'} bg={'red.600'} _hover={{bg:'red.500'}} isLoading={load} type="submit">Submit</Button>
     </form>
   </Box>
   
