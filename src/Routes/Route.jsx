@@ -37,6 +37,7 @@ import UpdateCustomer from './../pages/customer/UpdateCustomer';
 import AddnewCustomer from '../pages/customer/AddnewCustomer';
 import Addnewbassta from '../pages/customer/Addnewbassta';
 import Reports2 from './../pages/reports/Reports2';
+import AddTransaction from '../pages/transaction/AddTransaction';
 
 
 const Routess = () => {
@@ -76,8 +77,9 @@ const Routess = () => {
    <Route path='/layout/branches' element={<Branches user={useradmin}/>}/>
 
 
+   <Route path='/layout/transaction' element={<AddTransaction user={useradmin}/>}/>
 
-
+   
 
 
 

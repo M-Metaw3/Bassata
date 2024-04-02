@@ -57,7 +57,6 @@ const Viewadmin = () => {
       })
 
 
-
     const OverlayOne = () => (
       <ModalOverlay
         bg='blackAlpha.300'
