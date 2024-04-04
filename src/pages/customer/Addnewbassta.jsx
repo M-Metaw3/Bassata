@@ -19,8 +19,12 @@ const [load,setload]=useState(false)
     mobilePhone: '01066252526',
     nameEn: 'Ahmed',
     nameAr: 'احمد',
-    familyNameEn: 'Mohamed Hamdi Elmetwally Algebali',
-    familyNameAr: 'محمد حمدى المتولى الجبالى',
+    secondNameEn: "mohsen" ,
+    secondNameAr: "محسن",
+    thirdNameEn: "mohamed" ,
+    thirdNameAr: "محمد" ,
+    familyNameEn: ' Algebali',
+    familyNameAr: 'محمد',
     birthdate: '1990-01-01',
     gender: 'ذكر',
     addressAr: 'عنوان بالعربية',
@@ -100,7 +104,9 @@ const [load,setload]=useState(false)
         duration: 3000,
         isClosable: true,
       })
-      // Handle success, show message or redirect
+      setTimeout(() => {
+        window.location.reload();
+      }, 3000);
     } catch (error) {
       if (error.response && error.response.status === 401) {
         // If access token expired, refresh token and retry
@@ -144,6 +150,21 @@ const [load,setload]=useState(false)
       <label class="block" for="nameAr">Name (Arabic)</label>
       <input class="w-full border rounded-md py-2 px-3" type="text" id="nameAr" name="nameAr" value={formData.nameAr} onChange={handleChange} />
   
+      <label class="block" for="secondNameEn">Second Name En (English)</label>
+      <input class="w-full border rounded-md py-2 px-3" type="text" id="secondNameEn" name="secondNameEn" value={formData.secondNameEn} onChange={handleChange} />
+  
+      <label class="block" for="secondNameAr"> Second Name AR (Arabic)</label>
+      <input class="w-full border rounded-md py-2 px-3" type="text" id="secondNameAr" name="secondNameAr" value={formData.secondNameAr} onChange={handleChange} />
+
+
+      <label class="block" for="thirdNameEn">Third Name En(English)</label>
+      <input class="w-full border rounded-md py-2 px-3" type="text" id="thirdNameEn" name="thirdNameEn" value={formData.thirdNameEn} onChange={handleChange} />
+  
+      <label class="block" for="thirdNameAr"> Second Name AR (Arabic)</label>
+      <input class="w-full border rounded-md py-2 px-3" type="text" id="thirdNameAr" name="thirdNameAr" value={formData.thirdNameAr} onChange={handleChange} />
+
+
+
       <label class="block" for="familyNameEn">Family Name (English)</label>
       <input class="w-full border rounded-md py-2 px-3" type="text" id="familyNameEn" name="familyNameEn" value={formData.familyNameEn} onChange={handleChange} />
   
@@ -203,7 +224,7 @@ const [load,setload]=useState(false)
       <label class="block" for="faceImage">Face Image</label>
       <input class="w-full width={'150px'}  border rounded-md py-2 px-3" type="file" id="faceImage" name="faceImageUrl" onChange={handleFileChange} />
       {formData.faceImageUrl && (
-          <img src={formData.faceImageUrl} alt="Face Image" className="mt-2 max-w-xs" />
+          <img src={formData.faceImageUrl} width={'150px'}  alt="Face Image" className="mt-2 max-w-xs" />
         )}
       <label class="block" for="contract">Contract</label>
       <input class="w-full border rounded-md py-2 px-3" type="file" id="contract" name="contractUrl" onChange={handleFileChange} />

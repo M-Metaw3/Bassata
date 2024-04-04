@@ -93,7 +93,18 @@ const Footer = ({user}) => {
         </Box>
       </Box>
       </NavLink>)}
-
+      {hasAnyPermission(user,"Full-Access","View-Everything")&&(   <NavLink to={'/layout/verifyusers'}>
+      <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/verifyusers")&&' bg-red-800 text-red-600 text-white border-solid border-r-[5px] border-r-red-600'}`}>
+        <Box className="flex gap-2">
+          <img
+            loading="lazy"
+            src={branches}
+            className="w-6 aspect-square"
+          />
+          <Box className="grow">Verify Users </Box>
+        </Box>
+      </Box>
+      </NavLink>)}
 
       {hasAnyPermission(user,"Full-Access","View-Everything")&&(   <NavLink to={'/layout/branches'}>
       <Box   fontSize={{base:"0.8rem",md:'1.2rem'}} p={{base:"10px",md:"3%"}} className={`flex hover:bg-red-100 text-black flex-col justify-center items-start py-4 pr-16 pl-6 mt-7 w-full whitespace-wrap${isActive("/layout/branches")&&' bg-red-800 text-red-600 text-white border-solid border-r-[5px] border-r-red-600'}`}>

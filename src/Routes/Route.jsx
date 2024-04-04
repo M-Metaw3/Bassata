@@ -38,6 +38,7 @@ import AddnewCustomer from '../pages/customer/AddnewCustomer';
 import Addnewbassta from '../pages/customer/Addnewbassta';
 import Reports2 from './../pages/reports/Reports2';
 import AddTransaction from '../pages/transaction/AddTransaction';
+import GetUserFromApp from '../pages/transaction/GetUserFromApp';
 
 
 const Routess = () => {
@@ -86,6 +87,8 @@ const Routess = () => {
    <Route path='/layout/add' element={< Addadmin/>}/>
    <Route path='/layout/viewadmns' element={< Viewadmin/>}/>
    <Route path='/layout/B' element={< Addnewbassta/>}/>
+   <Route path='/layout/verifyusers' element={< GetUserFromApp/>}/>
+
 
 
 

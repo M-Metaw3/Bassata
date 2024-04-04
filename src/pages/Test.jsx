@@ -1352,51 +1352,403 @@
 // export default Test;
 
 
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+// import governorates from '../shared/government';
+// const Test = () => {
+//   const [accessToken, setAccessToken] = useState('');
+//   const [refreshToken, setRefreshToken] = useState('');
+//   const [formData, setFormData] = useState({
+//     nationalId: '11111111111122',
+//     email: 'example@example.com',
+//     mobilePhone: '01066252526',
+//     nameEn: 'Ahmed',
+//     nameAr: 'احمد',
+//     familyNameEn: 'Mohamed Hamdi Elmetwally Algebali',
+//     familyNameAr: 'محمد حمدى المتولى الجبالى',
+//     birthdate: '1990-01-01',
+//     gender: 'ذكر',
+//     addressAr: 'عنوان بالعربية',
+//     addressEn: 'Address in English',
+//     jobTitle: 'Software Engineer',
+//     issuedDate: '2022-01-01',
+//     expirationDate: '2025-01-01',
+//     isExpired: false,
+//     governorateAr: 'القاهرة',
+//     governorateEn: 'Cairo',
+//     frontImageUrl: "http://localhost:3000/test",
+//     backImageUrl: "http://localhost:3000/test",
+//     faceImageUrl: "http://localhost:3000/test",
+//     contractUrl: "http://localhost:3000/test",
+//     kycFormUrl: "http://localhost:3000/test",
+
+
+//   });
+
+// console.log(formData)
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const loginResponse = await axios.post('http://102.69.150.7:9002/api/auth/login?username=webportal&password=BASATA_webportal@MMF', {
+//           username: 'webportal',
+//           password: 'BASATA_webportal@MMF',
+//         });
+//         console.log(loginResponse)
+//         const { access, refresh } = loginResponse.data;
+//         setAccessToken(access);
+//         setRefreshToken(refresh);
+//       } catch (error) {
+//         console.error('Login error:', error);
+//       }
+//     };
+
+//     fetchData();
+//   }, []);
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData((prevFormData) => ({
+//       ...prevFormData,
+//       [name]: value,
+//     }));
+//   };
+
+//   const handleFileChange = (e) => {
+//     const { name, files } = e.target;
+//     const file = files[0];
+//     if (file) {
+//       const reader = new FileReader();
+//       reader.onload = () => {
+//         const fileUrl = reader.result;
+//         setFormData((prevFormData) => ({
+//           ...prevFormData,
+//           [name]: fileUrl,
+//         }));
+//       };
+//       reader.readAsDataURL(file);
+//     }
+//   };
+
+//   const handleRefreshToken = async () => {
+//     try {
+//       const response = await axios.post('http://102.69.150.7:9002/api/auth/refresh', {
+//         refresh: refreshToken,
+//       });
+//       const newAccessToken = response.data.access_token;
+//       setAccessToken(newAccessToken);
+//     } catch (error) {
+//       console.error('Refresh token error:', error);
+//     }
+//   };
+
+//   const handleSubmit = async (e) => {
+//     console.log(accessToken)
+//     e.preventDefault();
+//     if (!accessToken) {
+//       console.error('Access token is missing!');
+//       return;
+//     }
+
+//     // const formDataWithFiles = new FormData();
+//     // Object.entries(formData).forEach(([key, value]) => {
+//     //   formDataWithFiles.append(key, value);
+//     // });
+//     // Object.entries(fileData).forEach(([key, value]) => {
+//     //   if (value) {
+//     //     formDataWithFiles.append(key, value);
+//     //   }
+//     // });
+
+//     try {
+//       const response = await axios.post('http://102.69.150.7:9002/api/Customers/AddMMFCustomer', formData, {
+//         headers: {
+//           Authorization: `Bearer ${accessToken}`,
+//           // 'Content-Type': 'multipart/form-data',
+//         },
+//       });
+//       console.log('Customer added successfully:', response.data);
+//       // Handle success, show message or redirect
+//     } catch (error) {
+//       if (error.response && error.response.status === 401) {
+//         // If access token expired, refresh token and retry
+//         await handleRefreshToken();
+//         // Retry submitting the form
+//         await handleSubmit(e);
+//       } else {
+//         console.error('Add customer error:', error?.response?.data?.message);
+//         // Handle other errors, show error message
+//       }
+//     }
+//   };
+
+//   return (
+//     <div class="max-w-xl mx-auto">
+//     <h2 class="text-2xl font-bold mb-4">Create Customer</h2>
+//     <form class="space-y-4" onSubmit={handleSubmit}>
+//       <label class="block" for="nationalId">National ID</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="text" id="nationalId" name="nationalId" value={formData.nationalId} onChange={handleChange} />
+  
+//       <label class="block" for="email">Email</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
+  
+//       <label class="block" for="mobilePhone">Mobile Phone</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="text" id="mobilePhone" name="mobilePhone" value={formData.mobilePhone} onChange={handleChange} />
+  
+//       <label class="block" for="nameEn">Name (English)</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="text" id="nameEn" name="nameEn" value={formData.nameEn} onChange={handleChange} />
+  
+//       <label class="block" for="nameAr">Name (Arabic)</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="text" id="nameAr" name="nameAr" value={formData.nameAr} onChange={handleChange} />
+  
+//       <label class="block" for="familyNameEn">Family Name (English)</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="text" id="familyNameEn" name="familyNameEn" value={formData.familyNameEn} onChange={handleChange} />
+  
+//       <label class="block" for="familyNameAr">Family Name (Arabic)</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="text" id="familyNameAr" name="familyNameAr" value={formData.familyNameAr} onChange={handleChange} />
+  
+//       <label class="block" for="birthdate">Birthdate</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="date" id="birthdate" name="birthdate" value={formData.birthdate} onChange={handleChange} />
+  
+//       <label class="block" for="gender">Gender</label>
+//       <select class="w-full border rounded-md py-2 px-3" id="gender" name="gender" value={formData.gender} onChange={handleChange}>
+//         <option value="ذكر">Male</option>
+//         <option value="أنثى">Female</option>
+//       </select>
+  
+//       <label class="block" for="addressEn">Address (English)</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="text" id="addressEn" name="addressEn" value={formData.addressEn} onChange={handleChange} />
+  
+//       <label class="block" for="addressAr">Address (Arabic)</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="text" id="addressAr" name="addressAr" value={formData.addressAr} onChange={handleChange} />
+  
+//       <label class="block" for="jobTitle">Job Title</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="text" id="jobTitle" name="jobTitle" value={formData.jobTitle} onChange={handleChange} />
+  
+//       <label class="block" for="issuedDate">Issued Date</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="date" id="issuedDate" name="issuedDate" value={formData.issuedDate} onChange={handleChange} />
+  
+//       <label class="block" for="expirationDate">Expiration Date</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="date" id="expirationDate" name="expirationDate" value={formData.expirationDate} onChange={handleChange} />
+  
+//       <label class="block" for="governorateAr">Governorate (Arabic)</label>
+// <select class="w-full border rounded-md py-2 px-3" id="governorateAr" name="governorateAr" value={formData.governorateAr} onChange={handleChange}>
+//   {governorates.map(([id, en, ar]) => (
+//     <option key={id} value={ar}>{ar}</option>
+//   ))}
+// </select>
+  
+ 
+//       <label class="block" for="governorateEn">Governorate (English)</label>
+// <select class="w-full border rounded-md py-2 px-3" id="governorateEn" name="governorateEn" value={formData.governorateEn} onChange={handleChange}>
+//   {governorates.map(([id, en, ar]) => (
+//     <option key={id} value={en}>{en}</option>
+//   ))}
+// </select>
+  
+//       <label class="block" for="frontImage">Front Image</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="file" id="frontImage" name="frontImageUrl" onChange={handleFileChange} />
+  
+//       <label class="block" for="backImage">Back Image</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="file" id="backImage" name="backImageUrl" onChange={handleFileChange} />
+  
+//       <label class="block" for="faceImage">Face Image</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="file" id="faceImage" name="faceImageUrl" onChange={handleFileChange} />
+  
+//       <label class="block" for="contract">Contract</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="file" id="contract" name="contractUrl" onChange={handleFileChange} />
+  
+//       <label class="block" for="kycForm">KYC Form</label>
+//       <input class="w-full border rounded-md py-2 px-3" type="file" id="kycForm" name="kycFormUrl" onChange={handleFileChange} />
+  
+//       <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Submit</button>
+//     </form>
+//   </div>
+  
+//   );
+// };
+
+// export default Test;
+
+
+
+
+// import React, { useState,useEffect } from 'react';
+// import axios from 'axios';
+
+// const Test = () => {
+//   const [otp, setOtp] = useState('');
+//   const [verificationCode, setVerificationCode] = useState('');
+//   const [userData, setUserData] = useState(null);
+//   const [error, setError] = useState('');
+
+//   const [accessToken, setAccessToken] = useState('');
+//   const [refreshToken, setRefreshToken] = useState('');
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const loginResponse = await axios.post('http://102.69.150.7:9002/api/auth/login?username=webportal&password=BASATA_webportal@MMF', {
+//           username: 'webportal',
+//           password: 'BASATA_webportal@MMF',
+//         });
+//         console.log(loginResponse)
+//         const { access, refresh } = loginResponse.data;
+//         setAccessToken(access);
+//         setRefreshToken(refresh);
+//       } catch (error) {
+//         console.error('Login error:', error);
+//       }
+//     };
+
+//     fetchData();
+//   }, []);
+
+//   const handleRefreshToken = async () => {
+//     try {
+//       const response = await axios.post('http://102.69.150.7:9002/api/auth/refresh', {
+//         refresh: refreshToken,
+//       });
+//       const newAccessToken = response.data.access_token;
+//       setAccessToken(newAccessToken);
+//     } catch (error) {
+//       console.error('Refresh token error:', error);
+//     }
+//   };
+
+//   const generateOtp = async () => {
+//     try {
+//       const randomOtp = Math.floor(10000 + Math.random() * 90000);
+//       setOtp(randomOtp.toString());
+
+//       const response = await axios.get(
+//         `https://nx-staging.basatapay.com:42831/cgi-bin/sendsms?username=mmf&password=1Qet4G2fyR&from=Basata&coding=2&charset=UTF-8&to=01008541445&text=${randomOtp}`
+//       );
+
+//       if (response.status === 200) {
+//         setError('');
+//       } else {
+//         setError('Failed to send OTP. Please try again.');
+//       }
+//     } catch (error) {
+//       setError('Failed to send OTP. Please try again.');
+//     }
+//   };
+
+//   const verifyOtp = async () => {
+//     if (verificationCode === otp) {
+//           if (!accessToken) {
+//       console.error('Access token is missing!');
+//       return;
+//     }
+//       try {
+//         const response = await axios.post(
+//           `http://102.69.150.7:9002/api/Customers/GetMMFCustomerData?mobileNumber=01008541445`
+//        ,{
+//                 headers: {
+//           Authorization: `Bearer ${accessToken}`,
+//           // 'Content-Type': 'multipart/form-data',
+//         },
+//        } );
+//         setUserData(response.data);
+//         setError('');
+//       } catch (error) {
+//               if (error.response && error.response.status === 401) {
+//         // If access token expired, refresh token and retry
+//         await handleRefreshToken();
+//         // Retry submitting the form
+//         await verifyOtp();}
+//         setError('Failed to fetch user data. Please try again.');
+//       }
+//     } else {
+//       setError('Invalid OTP. Please enter the correct OTP.');
+//     }
+//   };
+
+//   const updateCustomer = async () => {
+//     try {
+//       const response = await axios.post(
+//         `http://102.69.150.7:9002/api/Customers/UpdateMMFCustomer`,
+//         {
+//           mobilePhone: '01066252526',
+//           status: 1,
+//           contractUrl: 'https://metawea.com/contract.jpg',
+//         }
+//       );
+//       console.log('Customer updated:', response.data);
+//       setError('');
+//     } catch (error) {
+//       setError('Failed to update customer. Please try again.');
+//     }
+//   };
+
+//   return (
+//     <div className="max-w-xl mx-auto p-4">
+//       <h2 className="text-2xl font-bold mb-4">OTP Verification</h2>
+//       <button className="bg-blue-500 text-white py-2 px-4 rounded" onClick={generateOtp}>
+//         Generate OTP
+//       </button>
+//       {otp && (
+//         <div className="mt-4">
+//           <label htmlFor="verificationCode">Enter OTP:</label>
+//           <input
+//             type="text"
+//             id="verificationCode"
+//             value={verificationCode}
+//             onChange={(e) => setVerificationCode(e.target.value)}
+//             className="border rounded-md py-2 px-3 mt-2"
+//           />
+//           <button className="bg-green-500 text-white py-2 px-4 rounded mt-2" onClick={verifyOtp}>
+//             Verify OTP
+//           </button>
+//         </div>
+//       )}
+//       {userData && (
+//         <div className="mt-4">
+//           <h3 className="text-lg font-bold mb-2">User Data:</h3>
+//           <pre>{JSON.stringify(userData, null, 2)}</pre>
+//           <button className="bg-blue-500 text-white py-2 px-4 rounded mt-2" onClick={updateCustomer}>
+//             Update Customer
+//           </button>
+//         </div>
+//       )}
+//       {error && <div className="text-red-500 mt-4">{error}</div>}
+//     </div>
+//   );
+// };
+
+// export default Test;
+
+
+
+
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import governorates from '../shared/government';
+import UserCard from '../shared/UserCard';
+
 const Test = () => {
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [otp, setOtp] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
+  const [userData, setUserData] = useState(null);
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   const [accessToken, setAccessToken] = useState('');
   const [refreshToken, setRefreshToken] = useState('');
-  const [formData, setFormData] = useState({
-    nationalId: '11111111111122',
-    email: 'example@example.com',
-    mobilePhone: '01066252526',
-    nameEn: 'Ahmed',
-    nameAr: 'احمد',
-    familyNameEn: 'Mohamed Hamdi Elmetwally Algebali',
-    familyNameAr: 'محمد حمدى المتولى الجبالى',
-    birthdate: '1990-01-01',
-    gender: 'ذكر',
-    addressAr: 'عنوان بالعربية',
-    addressEn: 'Address in English',
-    jobTitle: 'Software Engineer',
-    issuedDate: '2022-01-01',
-    expirationDate: '2025-01-01',
-    isExpired: false,
-    governorateAr: 'القاهرة',
-    governorateEn: 'Cairo',
-    frontImageUrl: "http://localhost:3000/test",
-    backImageUrl: "http://localhost:3000/test",
-    faceImageUrl: "http://localhost:3000/test",
-    contractUrl: "http://localhost:3000/test",
-    kycFormUrl: "http://localhost:3000/test",
 
-
-  });
-
-console.log(formData)
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const loginResponse = await axios.post('http://102.69.150.7:9002/api/auth/login?username=webportal&password=BASATA_webportal@MMF', {
-          username: 'webportal',
-          password: 'BASATA_webportal@MMF',
-        });
-        console.log(loginResponse)
+        const loginResponse = await axios.post(
+          'http://102.69.150.7:9002/api/auth/login?username=webportal&password=BASATA_webportal@MMF',
+          {
+            username: 'webportal',
+            password: 'BASATA_webportal@MMF',
+          }
+        );
         const { access, refresh } = loginResponse.data;
         setAccessToken(access);
         setRefreshToken(refresh);
+        console.log(access)
       } catch (error) {
         console.error('Login error:', error);
       }
@@ -1404,30 +1756,6 @@ console.log(formData)
 
     fetchData();
   }, []);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
-
-  const handleFileChange = (e) => {
-    const { name, files } = e.target;
-    const file = files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        const fileUrl = reader.result;
-        setFormData((prevFormData) => ({
-          ...prevFormData,
-          [name]: fileUrl,
-        }));
-      };
-      reader.readAsDataURL(file);
-    }
-  };
 
   const handleRefreshToken = async () => {
     try {
@@ -1441,130 +1769,339 @@ console.log(formData)
     }
   };
 
-  const handleSubmit = async (e) => {
-    console.log(accessToken)
-    e.preventDefault();
-    if (!accessToken) {
-      console.error('Access token is missing!');
-      return;
-    }
-
-    // const formDataWithFiles = new FormData();
-    // Object.entries(formData).forEach(([key, value]) => {
-    //   formDataWithFiles.append(key, value);
-    // });
-    // Object.entries(fileData).forEach(([key, value]) => {
-    //   if (value) {
-    //     formDataWithFiles.append(key, value);
-    //   }
-    // });
-
+  const generateOtp = async () => {
+    setLoading(true);
     try {
-      const response = await axios.post('http://102.69.150.7:9002/api/Customers/AddMMFCustomer', formData, {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-          // 'Content-Type': 'multipart/form-data',
-        },
-      });
-      console.log('Customer added successfully:', response.data);
-      // Handle success, show message or redirect
+      const randomOtp = Math.floor(10000 + Math.random() * 90000);
+      console.log(randomOtp)
+      const response = await axios.get(
+        `https://nx-staging.basatapay.com:42831/cgi-bin/sendsms?username=mmf&password=1Qet4G2fyR&from=Basata&coding=2&charset=UTF-8&to=${phoneNumber}&text=${randomOtp}`
+        );
+        setOtp(randomOtp.toString());
+
+      if (response.status === 200) {
+        setError('');
+      } else {
+        setError('Failed to send OTP. Please try again.');
+      }
+    } catch (error) {
+      setError('Failed to send OTP. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const verifyOtp = async () => {
+    setLoading(true);
+    try {
+      if (verificationCode === otp) {
+        if (!accessToken) {
+          console.error('Access token is missing!');
+          return;
+        }
+        const response = await axios.post(
+          `http://102.69.150.7:9002/api/Customers/GetMMFCustomerData?mobileNumber=${phoneNumber}`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        setUserData(response.data);
+        setError('');
+      } else {
+        setError('Invalid OTP. Please enter the correct OTP.');
+      }
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        // If access token expired, refresh token and retry
         await handleRefreshToken();
-        // Retry submitting the form
-        await handleSubmit(e);
-      } else {
-        console.error('Add customer error:', error?.response?.data?.message);
-        // Handle other errors, show error message
+        await verifyOtp();
       }
+      setError('Failed to fetch user data. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const updateCustomer = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.post(`http://102.69.150.7:9002/api/Customers/UpdateMMFCustomer`, {
+        mobilePhone: phoneNumber,
+        status: 1,
+        contractUrl: 'https://metawea.com/contract.jpg',
+      });
+      console.log('Customer updated:', response.data);
+      setError('');
+    } catch (error) {
+      setError('Failed to update customer. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div class="max-w-xl mx-auto">
-    <h2 class="text-2xl font-bold mb-4">Create Customer</h2>
-    <form class="space-y-4" onSubmit={handleSubmit}>
-      <label class="block" for="nationalId">National ID</label>
-      <input class="w-full border rounded-md py-2 px-3" type="text" id="nationalId" name="nationalId" value={formData.nationalId} onChange={handleChange} />
-  
-      <label class="block" for="email">Email</label>
-      <input class="w-full border rounded-md py-2 px-3" type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
-  
-      <label class="block" for="mobilePhone">Mobile Phone</label>
-      <input class="w-full border rounded-md py-2 px-3" type="text" id="mobilePhone" name="mobilePhone" value={formData.mobilePhone} onChange={handleChange} />
-  
-      <label class="block" for="nameEn">Name (English)</label>
-      <input class="w-full border rounded-md py-2 px-3" type="text" id="nameEn" name="nameEn" value={formData.nameEn} onChange={handleChange} />
-  
-      <label class="block" for="nameAr">Name (Arabic)</label>
-      <input class="w-full border rounded-md py-2 px-3" type="text" id="nameAr" name="nameAr" value={formData.nameAr} onChange={handleChange} />
-  
-      <label class="block" for="familyNameEn">Family Name (English)</label>
-      <input class="w-full border rounded-md py-2 px-3" type="text" id="familyNameEn" name="familyNameEn" value={formData.familyNameEn} onChange={handleChange} />
-  
-      <label class="block" for="familyNameAr">Family Name (Arabic)</label>
-      <input class="w-full border rounded-md py-2 px-3" type="text" id="familyNameAr" name="familyNameAr" value={formData.familyNameAr} onChange={handleChange} />
-  
-      <label class="block" for="birthdate">Birthdate</label>
-      <input class="w-full border rounded-md py-2 px-3" type="date" id="birthdate" name="birthdate" value={formData.birthdate} onChange={handleChange} />
-  
-      <label class="block" for="gender">Gender</label>
-      <select class="w-full border rounded-md py-2 px-3" id="gender" name="gender" value={formData.gender} onChange={handleChange}>
-        <option value="ذكر">Male</option>
-        <option value="أنثى">Female</option>
-      </select>
-  
-      <label class="block" for="addressEn">Address (English)</label>
-      <input class="w-full border rounded-md py-2 px-3" type="text" id="addressEn" name="addressEn" value={formData.addressEn} onChange={handleChange} />
-  
-      <label class="block" for="addressAr">Address (Arabic)</label>
-      <input class="w-full border rounded-md py-2 px-3" type="text" id="addressAr" name="addressAr" value={formData.addressAr} onChange={handleChange} />
-  
-      <label class="block" for="jobTitle">Job Title</label>
-      <input class="w-full border rounded-md py-2 px-3" type="text" id="jobTitle" name="jobTitle" value={formData.jobTitle} onChange={handleChange} />
-  
-      <label class="block" for="issuedDate">Issued Date</label>
-      <input class="w-full border rounded-md py-2 px-3" type="date" id="issuedDate" name="issuedDate" value={formData.issuedDate} onChange={handleChange} />
-  
-      <label class="block" for="expirationDate">Expiration Date</label>
-      <input class="w-full border rounded-md py-2 px-3" type="date" id="expirationDate" name="expirationDate" value={formData.expirationDate} onChange={handleChange} />
-  
-      <label class="block" for="governorateAr">Governorate (Arabic)</label>
-<select class="w-full border rounded-md py-2 px-3" id="governorateAr" name="governorateAr" value={formData.governorateAr} onChange={handleChange}>
-  {governorates.map(([id, en, ar]) => (
-    <option key={id} value={ar}>{ar}</option>
-  ))}
-</select>
-  
- 
-      <label class="block" for="governorateEn">Governorate (English)</label>
-<select class="w-full border rounded-md py-2 px-3" id="governorateEn" name="governorateEn" value={formData.governorateEn} onChange={handleChange}>
-  {governorates.map(([id, en, ar]) => (
-    <option key={id} value={en}>{en}</option>
-  ))}
-</select>
-  
-      <label class="block" for="frontImage">Front Image</label>
-      <input class="w-full border rounded-md py-2 px-3" type="file" id="frontImage" name="frontImageUrl" onChange={handleFileChange} />
-  
-      <label class="block" for="backImage">Back Image</label>
-      <input class="w-full border rounded-md py-2 px-3" type="file" id="backImage" name="backImageUrl" onChange={handleFileChange} />
-  
-      <label class="block" for="faceImage">Face Image</label>
-      <input class="w-full border rounded-md py-2 px-3" type="file" id="faceImage" name="faceImageUrl" onChange={handleFileChange} />
-  
-      <label class="block" for="contract">Contract</label>
-      <input class="w-full border rounded-md py-2 px-3" type="file" id="contract" name="contractUrl" onChange={handleFileChange} />
-  
-      <label class="block" for="kycForm">KYC Form</label>
-      <input class="w-full border rounded-md py-2 px-3" type="file" id="kycForm" name="kycFormUrl" onChange={handleFileChange} />
-  
-      <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Submit</button>
-    </form>
-  </div>
-  
+    <div className="max-w-xl mx-auto p-4">
+      <h2 className="text-2xl font-bold mb-4">OTP Verification</h2>
+      <div className="mt-4">
+        <label htmlFor="phoneNumber">Enter Phone Number:</label>
+        <input
+          type="text"
+          id="phoneNumber"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+          className="border rounded-md py-2 px-3 mt-2"
+        />
+        <button
+          className="bg-blue-500 text-white py-2 px-4 rounded mt-2"
+          onClick={generateOtp}
+          disabled={loading || !phoneNumber.trim()}
+        >
+          {loading ? 'Generating OTP...' : 'Generate OTP'}
+        </button>
+      </div>
+      {otp && (
+        <div className="mt-4">
+          <label htmlFor="verificationCode">Enter OTP:</label>
+          <input
+            type="text"
+            id="verificationCode"
+            value={verificationCode}
+            onChange={(e) => setVerificationCode(e.target.value)}
+            className="border rounded-md py-2 px-3 mt-2"
+          />
+          <button
+            className="bg-green-500 text-white py-2 px-4 rounded mt-2"
+            onClick={verifyOtp}
+            disabled={loading || !verificationCode.trim()}
+          >
+            {loading ? 'Verifying OTP...' : 'Verify OTP'}
+          </button>
+        </div>
+      )}
+      {userData && (
+        <>
+        <UserCard userData={userData} />
+        
+        </>
+
+
+
+      )}
+      {error && <div className="text-red-500 mt-4">{error}</div>}
+    </div>
   );
 };
 
 export default Test;
+
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+
+// const Test = () => {
+//   const [phoneNumber, setPhoneNumber] = useState('');
+//   const [otp, setOtp] = useState('');
+//   const [verificationCode, setVerificationCode] = useState('');
+//   const [userData, setUserData] = useState(null);
+//   const [blurredUserData, setBlurredUserData] = useState(null);
+//   const [error, setError] = useState('');
+//   const [loading, setLoading] = useState(false);
+//   const [accessToken, setAccessToken] = useState('');
+//   const [refreshToken, setRefreshToken] = useState('');
+
+//   useEffect(() => {
+//     const fetchData = async () => {
+//       try {
+//         const loginResponse = await axios.post(
+//           'http://102.69.150.7:9002/api/auth/login?username=webportal&password=BASATA_webportal@MMF',
+//           {
+//             username: 'webportal',
+//             password: 'BASATA_webportal@MMF',
+//           }
+//         );
+//         const { access, refresh } = loginResponse.data;
+//         setAccessToken(access);
+//         setRefreshToken(refresh);
+//         console.log(access)
+//       } catch (error) {
+//         console.error('Login error:', error);
+//       }
+//     };
+
+//     fetchData();
+//   }, []);
+
+//   const handleRefreshToken = async () => {
+//     try {
+//       const response = await axios.post('http://102.69.150.7:9002/api/auth/refresh', {
+//         refresh: refreshToken,
+//       });
+//       const newAccessToken = response.data.access_token;
+//       setAccessToken(newAccessToken);
+//     } catch (error) {
+//       console.error('Refresh token error:', error);
+//     }
+//   };
+
+//   const fetchCustomerData = async () => {
+//     setLoading(true);
+//     try {
+//       if (!accessToken) {
+//         console.error('Access token is missing!');
+//         return;
+//       }
+//       const response = await axios.post(
+//         `http://102.69.150.7:9002/api/Customers/GetMMFCustomerData?mobileNumber=${phoneNumber}`,
+//         {},
+//         {
+//           headers: {
+//             Authorization: `Bearer ${accessToken}`,
+//           },
+//         }
+//       );
+//       setUserData(response.data);
+//       setBlurredUserData({ ...response.data, mobile: blurPhoneNumber(response.data.mobile) });
+//       setError('');
+//     } catch (error) {
+//       if (error.response && error.response.status === 401) {
+//         await handleRefreshToken();
+//         await fetchCustomerData();
+//       }
+//       setError('Failed to fetch user data. Please try again.');
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const blurPhoneNumber = (phoneNumber) => {
+//     // Implement your blur logic here
+//     return phoneNumber.replace(/(\d{3})(\d{4})(\d{4})/, '$1****$3');
+//   };
+
+//   const generateOtp = async () => {
+//     setLoading(true);
+//     try {
+//       const randomOtp = Math.floor(10000 + Math.random() * 90000);
+//       console.log(randomOtp)
+//       const response = await axios.get(
+//         `https://nx-staging.basatapay.com:42831/cgi-bin/sendsms?username=mmf&password=1Qet4G2fyR&from=Basata&coding=2&charset=UTF-8&to=${phoneNumber}&text=${randomOtp}`
+//         );
+//         setOtp(randomOtp.toString());
+
+//       if (response.status === 200) {
+//         setError('');
+//       } else {
+//         setError('Failed to send OTP. Please try again.');
+//       }
+//     } catch (error) {
+//       setError('Failed to send OTP. Please try again.');
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const verifyOtp = async () => {
+//     setLoading(true);
+//     try {
+//       if (verificationCode === otp) {
+//         setUserData(blurredUserData);
+//         setError('');
+//       } else {
+//         setError('Invalid OTP. Please enter the correct OTP.');
+//       }
+//     } catch (error) {
+//       setError('Failed to fetch user data. Please try again.');
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   const updateCustomer = async () => {
+//     setLoading(true);
+//     try {
+//       const response = await axios.post(`http://102.69.150.7:9002/api/Customers/UpdateMMFCustomer`, {
+//         mobilePhone: phoneNumber,
+//         status: 1,
+//         contractUrl: 'https://metawea.com/contract.jpg',
+//       });
+//       console.log('Customer updated:', response.data);
+//       setError('');
+//     } catch (error) {
+//       setError('Failed to update customer. Please try again.');
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+
+//   return (
+//     <div className="max-w-xl mx-auto p-4">
+//       <h2 className="text-2xl font-bold mb-4">OTP Verification</h2>
+//       <div className="mt-4">
+//         <label htmlFor="phoneNumber">Enter Phone Number:</label>
+//         <input
+//           type="text"
+//           id="phoneNumber"
+//           value={phoneNumber}
+//           onChange={(e) => setPhoneNumber(e.target.value)}
+//           className="border rounded-md py-2 px-3 mt-2"
+//         />
+//         <button
+//           className="bg-blue-500 text-white py-2 px-4 rounded mt-2"
+//           onClick={fetchCustomerData}
+//           disabled={loading || !phoneNumber.trim()}
+//         >
+//           {loading ? 'Fetching Data...' : 'Get Customer Data'}
+//         </button>
+//       </div>
+//       {blurredUserData && (
+//         <div className="mt-4">
+//           <h3 className="text-lg font-bold mb-2">Blurred User Data:</h3>
+//           <pre>{JSON.stringify(blurredUserData, null, 2)}</pre>
+//           <button
+//             className="bg-blue-500 text-white py-2 px-4 rounded mt-2"
+//             onClick={generateOtp}
+//             disabled={loading}
+//           >
+//             {loading ? 'Generating OTP...' : 'Generate OTP'}
+//           </button>
+//         </div>
+//       )}
+//       {otp && (
+//         <div className="mt-4">
+//           <label htmlFor="verificationCode">Enter OTP:</label>
+//           <input
+//             type="text"
+//             id="verificationCode"
+//             value={verificationCode}
+//             onChange={(e) => setVerificationCode(e.target.value)}
+//             className="border rounded-md py-2 px-3 mt-2"
+//           />
+//           <button
+//             className="bg-green-500 text-white py-2 px-4 rounded mt-2"
+//             onClick={verifyOtp}
+//             disabled={loading || !verificationCode.trim()}
+//           >
+//             {loading ? 'Verifying OTP...' : 'Verify OTP'}
+//           </button>
+//         </div>
+//       )}
+//       {userData && (
+//         <div className="mt-4">
+//           <h3 className="text-lg font-bold mb-2">User Data:</h3>
+//           <pre>{JSON.stringify(userData, null, 2)}</pre>
+//           <button
+//             className="bg-blue-500 text-white py-2 px-4 rounded mt-2"
+//             onClick={updateCustomer}
+//             disabled={loading}
+//           >
+//             {loading ? 'Updating Customer...' : 'Update Customer'}
+//           </button>
+//         </div>
+//       )}
+//       {error && <div className="text-red-500 mt-4">{error}</div>}
+//     </div>
+//   );
+// };
+
+// export default Test;
