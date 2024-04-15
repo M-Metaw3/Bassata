@@ -39,18 +39,18 @@ const GetUserFromApp = () => {
         const randomOtp = Math.floor(10000 + Math.random() * 90000);
         console.log(randomOtp)
         setLoading(true);
-      // const response = await axios.get(
-      //   `https://nx-staging.basatapay.com:42831/cgi-bin/sendsms?username=mmf&password=1Qet4G2fyR&from=Basata&coding=2&charset=UTF-8&to=${phoneNumber}&text=${randomOtp}`
-      //   );
-      //   console.log(response)
-        // setOtp(randomOtp.toString());
+      const response = await axios.get(
+        `https://nx-staging.basatapay.com:42831/cgi-bin/sendsms?username=mmf&password=1Qet4G2fyR&from=Basata&coding=2&charset=UTF-8&to=${phoneNumber}&text=${randomOtp}`
+        );
+        console.log(response)
+        setOtp(randomOtp.toString());
         setOtp('55493');
 
-    //   if (response.status === 202) {
-    //     setError('');
-    //   } else {
+      if (response.status === 202) {
+        setError('');
+      } else {
       
-    //   }
+      }
     } catch (error) {
       setError('Failed to send OTP. Please try again.');
     } finally {
