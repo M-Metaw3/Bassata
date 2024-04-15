@@ -44,7 +44,7 @@ const GetUserFromApp = () => {
         );
         console.log(response)
         setOtp(randomOtp.toString());
-        setOtp('55493');
+        // setOtp('55493');
 
       if (response.status === 202) {
         setError('');
