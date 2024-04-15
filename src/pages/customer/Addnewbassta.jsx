@@ -1,16 +1,30 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useLayoutEffect  } from 'react';
+import { getTokens, refreshAccessToken, makeApiRequest } from '../../shared/authUtils';
 import axios from 'axios';
 import {Box,useToast,Button} from'@chakra-ui/react'
 
 import governorates from '../../shared/government';
-import useAuth from './../../shared/useAuth';
+// import useAuth from './../../shared/useAuth';
 import { Navigate } from 'react-router-dom';
 
 const Addnewbassta = () => {
-  const { accessToken, handleRefreshToken } = useAuth();
+  const [accessToken, setAccessToken] = useState('');
+  const [refreshToken, setRefreshToken] = useState('');
+  
+  useLayoutEffect (() => {
+    const fetchData = async () => {
+      try {
+        const { accessToken: newAccessToken, refreshToken: newRefreshToken } = await getTokens();
+        setAccessToken(newAccessToken);
+        setRefreshToken(newRefreshToken);
+      } catch (error) {
+        console.error('Error fetching tokens:', error);
+      }
+    };
 
-console.log(accessToken)
+    fetchData();
+  }, []);
   const toast = useToast();
 const [load,setload]=useState(false)
   const [formData, setFormData] = useState({
@@ -40,8 +54,6 @@ const [load,setload]=useState(false)
     faceImageUrl: "",
     contractUrl: "",
     kycFormUrl: "",
-
-
   });
 
 
@@ -55,6 +67,8 @@ const [load,setload]=useState(false)
       [name]: value,
     }));
   };
+
+
 
   const handleFileChange = (e) => {
     const { name, files } = e.target;
@@ -88,8 +102,9 @@ const [load,setload]=useState(false)
       return;
     }
 
-
     try {
+      const newAccessToken = await refreshAccessToken(refreshToken);
+      setAccessToken(newAccessToken);
       setload(true)
       const response = await axios.post('http://102.69.150.7:9002/api/Customers/AddMMFCustomer', formData, {
         headers: {
@@ -110,7 +125,8 @@ const [load,setload]=useState(false)
     } catch (error) {
       if (error.response && error.response.status === 401) {
         // If access token expired, refresh token and retry
-        await handleRefreshToken();
+        console.log("object")
+        await refreshAccessToken();
         // Retry submitting the form
         await handleSubmit(e);
       } else {
@@ -233,7 +249,7 @@ const [load,setload]=useState(false)
       <input class="w-full border rounded-md py-2 px-3" type="file" id="kycForm" name="kycFormUrl" onChange={handleFileChange} />
       </Box>
     </Box>
-      <Button width={'full'} bg={'red.600'} _hover={{bg:'red.500'}} isLoading={load} type="submit">Submit</Button>
+      <Button width={'full'} bg={'red.600'} isDisabled={!accessToken} _hover={{bg:'red.500'}} isLoading={load} type="submit">Submit</Button>
     </form>
   </Box>
   

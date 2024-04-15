@@ -1,8 +1,9 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useLayoutEffect } from 'react';
 import axios from 'axios';
 import UserCard from '../../shared/UserCard';
 import { Box, Button, FormControl, FormHelperText, FormLabel, Input, WrapItem } from '@chakra-ui/react';
+import { getTokens, refreshAccessToken, makeApiRequest } from '../../shared/authUtils';
 
 const GetUserFromApp = () => {
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -14,39 +15,20 @@ const GetUserFromApp = () => {
   const [accessToken, setAccessToken] = useState('');
   const [refreshToken, setRefreshToken] = useState('');
 
-  useEffect(() => {
+  useLayoutEffect (() => {
     const fetchData = async () => {
       try {
-        const loginResponse = await axios.post(
-          'http://102.69.150.7:9002/api/auth/login?username=webportal&password=BASATA_webportal@MMF',
-          {
-            username: 'webportal',
-            password: 'BASATA_webportal@MMF',
-          }
-        );
-        const { access, refresh } = loginResponse.data;
-        setAccessToken(access);
-        setRefreshToken(refresh);
-        console.log(access)
+        const { accessToken: newAccessToken, refreshToken: newRefreshToken } = await getTokens();
+        setAccessToken(newAccessToken);
+        setRefreshToken(newRefreshToken);
       } catch (error) {
-        console.error('Login error:', error);
+        console.error('Error fetching tokens:', error);
       }
     };
 
     fetchData();
   }, []);
 
-  const handleRefreshToken = async () => {
-    try {
-      const response = await axios.post('http://102.69.150.7:9002/api/auth/refresh', {
-        refresh: refreshToken,
-      });
-      const newAccessToken = response.data.access_token;
-      setAccessToken(newAccessToken);
-    } catch (error) {
-      console.error('Refresh token error:', error);
-    }
-  };
 
   const generateOtp = async () => {
     if (phoneNumber.length < 10) {
@@ -57,11 +39,11 @@ const GetUserFromApp = () => {
         const randomOtp = Math.floor(10000 + Math.random() * 90000);
         console.log(randomOtp)
         setLoading(true);
-    //   const response = await axios.get(
-    //     `https://nx-staging.basatapay.com:42831/cgi-bin/sendsms?username=mmf&password=1Qet4G2fyR&from=Basata&coding=2&charset=UTF-8&to=${phoneNumber}&text=${randomOtp}`
-    //     );
-    //     console.log(response)
-        setOtp(randomOtp.toString());
+      // const response = await axios.get(
+      //   `https://nx-staging.basatapay.com:42831/cgi-bin/sendsms?username=mmf&password=1Qet4G2fyR&from=Basata&coding=2&charset=UTF-8&to=${phoneNumber}&text=${randomOtp}`
+      //   );
+      //   console.log(response)
+        // setOtp(randomOtp.toString());
         setOtp('55493');
 
     //   if (response.status === 202) {
@@ -84,6 +66,8 @@ const GetUserFromApp = () => {
           console.error('Access token is missing!');
           return;
         }
+        const newAccessToken = await refreshAccessToken(refreshToken);
+        setAccessToken(newAccessToken);
         const response = await axios.post(
           `http://102.69.150.7:9002/api/Customers/GetMMFCustomerData?mobileNumber=${phoneNumber}`,
           {},
@@ -105,6 +89,14 @@ const GetUserFromApp = () => {
         await handleRefreshToken();
         await verifyOtp();
       }
+      if(error?.response?.status==404){
+        setError('user not found')
+        setUserData('')
+        setOtp('');
+        setVerificationCode('')
+return;
+      }
+     
       setError('Failed to fetch user data. Please try again.');
     } finally {
       setLoading(false);
@@ -112,6 +104,7 @@ const GetUserFromApp = () => {
   };
 
   const updateCustomer = async () => {
+    console.log("done")
     setLoading(true);
     try {
       const response = await axios.post(`http://102.69.150.7:9002/api/Customers/UpdateMMFCustomer`, {
