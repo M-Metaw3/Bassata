@@ -86,7 +86,7 @@ const GetUserFromApp = () => {
       }
     } catch (error) {
       if (error.response && error.response.status === 401) {
-        await handleRefreshToken();
+        await refreshAccessToken(refreshToken);
         await verifyOtp();
       }
       if(error?.response?.status==404){
