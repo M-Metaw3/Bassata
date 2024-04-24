@@ -242,29 +242,30 @@ export default function Registration({isjwt,islogin}) {
           
           />
             </div>
-            <div className="flex flex-col justify-center p-2.5 mt-8 rounded-2xl border border-solid border-[color:var(--Gray-Gray-4,#838383)] text-zinc-400 max-md:max-w-full">
-              <Box  display={"flex"} className="flex  justify-between p-2.5 max-md:flex-wrap max-md:max-w-full">
+            <div className="justify-center items-start py-3 pr-16 pl-5 mt-8 whitespace-nowrap rounded-2xl border border-solid border-[color:var(--Gray-Gray-4,#838383)] text-zinc-400 max-md:pr-5 max-md:max-w-full">
+           
                         <input
              type="password"
              name="password" value={formData.password} onChange={handleChange}
              placeholder="Password"
        
-       className="w-[90%] h-full bg-transparent border-none focus:outline-none"
+             className="w-full h-full bg-transparent border-none focus:outline-none"
+       
           
           /> 
-                <img
+                {/* <img
                   loading="lazy"
                   src="https://cdn.builder.io/api/v1/image/assets/TEMP/62eea3ae81fd6d268d56643b4966ad3140a490bca8bd1eb2c6c495a751610f98?"
                   className="w-6 aspect-square"
-                />
-              </Box>
+                /> */}
+          
             </div>
-            <Button isLoading={loading} bg={"red.500"} p={"40px"} onClick={handleSubmit}  className="justify-center hover:bg-red-400 items-center px-16 py-4 mt-8 text-center whitespace-nowrap bg-red-600 rounded-2xl text-neutral-200 max-md:px-5 max-md:max-w-full">
+            <Button isLoading={loading} bg={"red.500"} p={"25px"} onClick={handleSubmit}  className="justify-center hover:bg-red-400 items-center px-16 py-4 mt-8 text-center whitespace-nowrap bg-red-600 rounded-2xl text-neutral-200 max-md:px-5 max-md:max-w-full">
               Log in{" "}
             </Button>
           </div>
         </div>
-        <Box display={{base:"none" ,md:'block'}} h={"100vh"} className="flex flex-col ml-5 w-[65%] max-md:ml-0 max-md:w-full">
+        <Box display={{base:"none" ,md:'block'}} h={"105vh"} className="flex flex-col ml-5 w-[65%] max-md:ml-0 max-md:w-full">
           <img
             loading="lazy"
             src={loginimage}
