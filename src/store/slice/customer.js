@@ -24,7 +24,7 @@ export const customerSlice = createSlice({
     },
     openmodalcustomer:  (state, action) => {
 
-console.log(action)
+
       state.openmodal= action.payload
     },
   },

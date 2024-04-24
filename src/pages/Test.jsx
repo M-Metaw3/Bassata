@@ -2106,43 +2106,459 @@
 
 // export default Test;
 // AuthComponent.js
-import React, { useState, useLayoutEffect  } from 'react';
-import { getTokens, refreshAccessToken, makeApiRequest } from '../shared/authUtils';
+
+
+
+
+
+
+
+
+
+
+// import React, { useState, useLayoutEffect  } from 'react';
+// import { getTokens, refreshAccessToken, makeApiRequest } from '../shared/authUtils';
+
+// const Test = () => {
+//   const [accessToken, setAccessToken] = useState('');
+//   const [refreshToken, setRefreshToken] = useState('');
+
+//   useLayoutEffect (() => {
+//     const fetchData = async () => {
+//       try {
+//         const { accessToken: newAccessToken, refreshToken: newRefreshToken } = await getTokens();
+//         setAccessToken(newAccessToken);
+//         setRefreshToken(newRefreshToken);
+//       } catch (error) {
+//         console.error('Error fetching tokens:', error);
+//       }
+//     };
+
+//     fetchData();
+//   }, []);
+
+//   const handleApiRequest = async () => {
+//     try {
+//       const newAccessToken = await refreshAccessToken();
+//       const apiResponse = await makeApiRequest(newAccessToken);
+//       console.log('API response:', apiResponse);
+//     } catch (error) {
+//       console.error('Error making API request:', error);
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <h1>Access Token: {accessToken}</h1>
+//       <h1>Refresh Token: {refreshToken}</h1>
+//       <button onClick={handleApiRequest}>Make API Request</button>
+//     </div>
+//   );
+// };
+
+// export default Test;
+
+
+
+
+
+
+
+
+
+
+import React, { Component,useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import userSchema from '../validations/customervalidation';
+import { useToast } from '@chakra-ui/react';
+
+class ErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error('Error caught by ErrorBoundary:', error, errorInfo);
+    // You can log the error to an error reporting service here
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.hasError && !this.state.hasError) {
+      // Clear the toast when the error is resolved
+      toast.dismiss();
+    }
+  }
+
+  render() {
+    if (this.state.hasError) {
+      const { error } = this.state;
+      if (error instanceof ValidationError) {
+        toast.error(error.message, { autoClose: 5000 });
+      } else {
+        toast.error('Something went wrong. Please try again later.', { autoClose: 5000 });
+      }
+      return <h1>Error Encountered</h1>; // Fallback UI
+    }
+
+    return (
+      <>
+        <ToastContainer />
+        {this.props.children}
+      </>
+    );
+  }
+}
+
+class ValidationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'ValidationError';
+  }
+}
+
+// export { ErrorBoundary, ValidationError };
+
+
+
+// import React from 'react';
+// import { ValidationError } from './ErrorBoundary';
+
+// const My = () => {
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     const inputVal = e.target.elements.input.value.trim();
+//     if (!inputVal) {
+//       throw new ValidationError('Input cannot be empty.');
+//     }
+//     // Other form submission logic
+//   };
+
+//   return (
+//     <form onSubmit={handleSubmit}>
+//       <input type="text" name="input" placeholder="Enter something" />
+//       <button type="submit">Submit</button>
+//     </form>
+//   );
+// };
+
+
+
+
+
+
+
+//  // Replace MyComponent with your actual component
+
+// function Test() {
+//   return (
+//     <div className="App">
+//       <header className="App-header">
+//         <h1 className="text-2xl font-bold mb-4">My App</h1>
+//       </header>
+//       <main>
+//         <ErrorBoundary>
+//           <My />
+//         </ErrorBoundary>
+//       </main>
+//     </div>
+//   );
+// }
+
+// export default Test;
+
+
+
+// import React from 'react';
+
 
 const Test = () => {
-  const [accessToken, setAccessToken] = useState('');
-  const [refreshToken, setRefreshToken] = useState('');
+const toast = useToast();
+const [err,seterr]=useState({})
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  useLayoutEffect (() => {
-    const fetchData = async () => {
-      try {
-        const { accessToken: newAccessToken, refreshToken: newRefreshToken } = await getTokens();
-        setAccessToken(newAccessToken);
-        setRefreshToken(newRefreshToken);
-      } catch (error) {
-        console.error('Error fetching tokens:', error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const handleApiRequest = async () => {
+    const formData = new FormData(e.target);
+    
     try {
-      const newAccessToken = await refreshAccessToken();
-      const apiResponse = await makeApiRequest(newAccessToken);
-      console.log('API response:', apiResponse);
+     const r= await userSchema.validate(Object.fromEntries(formData), { abortEarly: false });
+     console.log(r)
+      // console.log(Object.fromEntries(formData));
+      // const data = await response.json();
+      // console.log('Form submitted successfully:', data);
+      e.target.reset(); // Reset the form after successful submission
     } catch (error) {
-      console.error('Error making API request:', error);
+      let newerror ={}
+      error.inner.forEach((err)=>{
+        newerror[err.path]=err.message
+      })
+seterr(newerror)
+      console.error('Error submitting form:', newerror);
     }
   };
 
   return (
-    <div>
-      <h1>Access Token: {accessToken}</h1>
-      <h1>Refresh Token: {refreshToken}</h1>
-      <button onClick={handleApiRequest}>Make API Request</button>
-    </div>
+    // <form className="space-y-4 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+    //   <label htmlFor="nationalId">National ID</label>
+    //   <input type="text" id="nationalId" name="nationalId" required />
+
+    //   <label htmlFor="email">Email</label>
+    //   <input type="email" id="email" name="email" required />
+
+    //   <label htmlFor="mobilePhone">Mobile Phone</label>
+    //   <input type="text" id="mobilePhone" name="mobilePhone" required />
+
+    //   <label htmlFor="nameEn">Name (English)</label>
+    //   <input type="text" id="nameEn" name="nameEn" required />
+
+    //   <label htmlFor="nameAr">Name (Arabic)</label>
+    //   <input type="text" id="nameAr" name="nameAr" required />
+
+    //   <label htmlFor="secondNameEn">Second Name En (English)</label>
+    //   <input type="text" id="secondNameEn" name="secondNameEn" required />
+
+    //   <label htmlFor="secondNameAr">Second Name AR (Arabic)</label>
+    //   <input type="text" id="secondNameAr" name="secondNameAr" required />
+
+    //   <label htmlFor="thirdNameEn">Third Name En (English)</label>
+    //   <input type="text" id="thirdNameEn" name="thirdNameEn" required />
+
+    //   <label htmlFor="thirdNameAr">Third Name AR (Arabic)</label>
+    //   <input type="text" id="thirdNameAr" name="thirdNameAr" required />
+
+    //   <label htmlFor="familyNameEn">Family Name (English)</label>
+    //   <input type="text" id="familyNameEn" name="familyNameEn" required />
+
+    //   <label htmlFor="familyNameAr">Family Name (Arabic)</label>
+    //   <input type="text" id="familyNameAr" name="familyNameAr" required />
+
+    //   <label htmlFor="birthdate">Birthdate</label>
+    //   <input type="date" id="birthdate" name="birthdate" required />
+
+    //   <label htmlFor="gender">Gender</label>
+    //   <select id="gender" name="gender" required>
+    //     <option value="Male">Male</option>
+    //     <option value="Female">Female</option>
+    //   </select>
+
+    //   <label htmlFor="addressEn">Address (English)</label>
+    //   <input type="text" id="addressEn" name="addressEn" required />
+
+    //   <label htmlFor="addressAr">Address (Arabic)</label>
+    //   <input type="text" id="addressAr" name="addressAr" required />
+
+    //   <label htmlFor="jobTitle">Job Title</label>
+    //   <input type="text" id="jobTitle" name="jobTitle" required />
+
+    //   <label htmlFor="issuedDate">Issued Date</label>
+    //   <input type="date" id="issuedDate" name="issuedDate" required />
+
+    //   <label htmlFor="expirationDate">Expiration Date</label>
+    //   <input type="date" id="expirationDate" name="expirationDate" required />
+
+    //   <label htmlFor="governorateEn">Governorate (English)</label>
+    //   <select id="governorateEn" name="governorateEn" required>
+    //     <option value="Governorate1">Governorate1</option>
+    //     <option value="Governorate2">Governorate2</option>
+    //     <option value="Governorate3">Governorate3</option>
+    //   </select>
+
+    //   <label htmlFor="governorateAr">Governorate (Arabic)</label>
+    //   <select id="governorateAr" name="governorateAr" required>
+    //     <option value="محافظة1">محافظة1</option>
+    //     <option value="محافظة2">محافظة2</option>
+    //     <option value="محافظة3">محافظة3</option>
+    //   </select>
+
+    //   <label htmlFor="frontImage">Front Image</label>
+    //   <input type="file" id="frontImage" name="frontImage" accept="image/*" />
+
+    //   <label htmlFor="backImage">Back Image</label>
+    //   <input type="file" id="backImage" name="backImage" accept="image/*" />
+
+    //   <label htmlFor="faceImage">Face Image</label>
+    //   <input type="file" id="faceImage" name="faceImage" accept="image/*" />
+
+    //   <label htmlFor="contract">Contract</label>
+    //   <input type="file" id="contract" name="contract" />
+
+    //   <label htmlFor="kycForm">KYC Form</label>
+    //   <input type="file" id="kycForm" name="kycForm" />
+
+    //   <button type="submit">Submit</button>
+    // </form>
+
+
+
+
+
+
+
+
+
+
+
+<>
+
+
+
+    <form className="space-y-4 bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>
+  <div className="mb-4">
+    <label htmlFor="nationalId" className="block text-gray-700 text-sm font-bold mb-2">National ID</label>
+    <input type="text" id="nationalId" name="nationalId" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Email</label>
+    <input type="email" id="email" name="email" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="mobilePhone" className="block text-gray-700 text-sm font-bold mb-2">Mobile Phone</label>
+    <input type="text" id="mobilePhone" name="mobilePhone" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="nameEn" className="block text-gray-700 text-sm font-bold mb-2">Name (English)</label>
+    <input type="text" id="nameEn" name="nameEn" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="nameAr" className="block text-gray-700 text-sm font-bold mb-2">Name (Arabic)</label>
+    <input type="text" id="nameAr" name="nameAr" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="secondNameEn" className="block text-gray-700 text-sm font-bold mb-2">Second Name (English)</label>
+    <input type="text" id="secondNameEn" name="secondNameEn" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="secondNameAr" className="block text-gray-700 text-sm font-bold mb-2">Second Name (Arabic)</label>
+    <input type="text" id="secondNameAr" name="secondNameAr" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="thirdNameEn" className="block text-gray-700 text-sm font-bold mb-2">Third Name (English)</label>
+    <input type="text" id="thirdNameEn" name="thirdNameEn" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="thirdNameAr" className="block text-gray-700 text-sm font-bold mb-2">Third Name (Arabic)</label>
+    <input type="text" id="thirdNameAr" name="thirdNameAr" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="familyNameEn" className="block text-gray-700 text-sm font-bold mb-2">Family Name (English)</label>
+    <input type="text" id="familyNameEn" name="familyNameEn" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="familyNameAr" className="block text-gray-700 text-sm font-bold mb-2">Family Name (Arabic)</label>
+    <input type="text" id="familyNameAr" name="familyNameAr" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="birthdate" className="block text-gray-700 text-sm font-bold mb-2">Birthdate</label>
+    <input type="date" id="birthdate" name="birthdate" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="gender" className="block text-gray-700 text-sm font-bold mb-2">Gender</label>
+    <select id="gender" name="gender" required className="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+    </select>
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="addressEn" className="block text-gray-700 text-sm font-bold mb-2">Address (English)</label>
+    <input type="text" id="addressEn" name="addressEn" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="addressAr" className="block text-gray-700 text-sm font-bold mb-2">Address (Arabic)</label>
+    <input type="text" id="addressAr" name="addressAr" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="jobTitle" className="block text-gray-700 text-sm font-bold mb-2">Job Title</label>
+    <input type="text" id="jobTitle" name="jobTitle" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="issuedDate" className="block text-gray-700 text-sm font-bold mb-2">Issued Date</label>
+    <input type="date" id="issuedDate" name="issuedDate" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="expirationDate" className="block text-gray-700 text-sm font-bold mb-2">Expiration Date</label>
+    <input type="date" id="expirationDate" name="expirationDate" required className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+  </div>
+
+  <div className="mb-4">
+    <label htmlFor="governorateEn" className="block text-gray-700 text-sm font-bold mb-2">Governorate (English)</label>
+    <select id="governorateEn" name="governorateEn" required className="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+      <option value="Governorate1">Governorate1</option>
+      <option value="Governorate2">Governorate2</option>
+      <option value="Governorate3">Governorate3</option>
+    </select>
+  </div>
+
+  
+
+<div className="mb-4">
+  <label htmlFor="governorateAr" className="block text-gray-700 text-sm font-bold mb-2">Governorate (Arabic)</label>
+  <select id="governorateAr" name="governorateAr" required className="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+    <option value="محافظة1">محافظة1</option>
+    <option value="محافظة2">محافظة2</option>
+    <option value="محافظة3">محافظة3</option>
+  </select>
+</div>
+
+<div className="mb-4">
+  <label htmlFor="frontImage" className="block text-gray-700 text-sm font-bold mb-2">Front Image</label>
+  <input type="file" id="frontImage" name="frontImage" accept="image/*" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+</div>
+
+<div className="mb-4">
+  <label htmlFor="backImage" className="block text-gray-700 text-sm font-bold mb-2">Back Image</label>
+  <input type="file" id="backImage" name="backImage" accept="image/*" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+</div>
+
+<div className="mb-4">
+  <label htmlFor="faceImage" className="block text-gray-700 text-sm font-bold mb-2">Face Image</label>
+  <input type="file" id="faceImage" name="faceImage" accept="image/*" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+</div>
+
+<div className="mb-4">
+  <label htmlFor="contract" className="block text-gray-700 text-sm font-bold mb-2">Contract</label>
+  <input type="file" id="contract" name="contract" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+</div>
+
+<div className="mb-4">
+  <label htmlFor="kycForm" className="block text-gray-700 text-sm font-bold mb-2">KYC Form</label>
+  <input type="file" id="kycForm" name="kycForm" className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" />
+</div>
+
+<div className="flex items-center justify-between">
+  <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit</button>
+</div>
+</form>
+  <div>
+  <ul>
+    {Object.keys(err).map((key, index) => (
+      <li className='text-red-600' key={index}>{err[key]}</li>
+    ))}
+  </ul>
+</div>
+</>
+
   );
 };
 

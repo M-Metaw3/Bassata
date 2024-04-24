@@ -23,7 +23,7 @@ export const GetData = async (url) => {
 
   
   export const GetDataProtected = async (url) => {
-    const token = localStorage.getItem("token");
+    // const token = localStorage.getItem("token");
 
     const res = await axiosBaseUrl.get(url, config);
     return res.data;
@@ -69,6 +69,23 @@ export const GetData = async (url) => {
     return res;
   };
     
+
+
+
+
+
+  export const PostDataWithImg2 = async (url, data) => {
+    console.log(data)
+    // const config = {
+    //   headers: {
+    //     Authorization: `Bearer ${Cookies.get('token')}`,
+    //     api_key:`${apiKey}`
+    //   },
+    //   onUploadProgress,
+    // };
+    const res = await axiosBaseUrl.post(url, data, config);
+    return res;
+  };
 
 
 

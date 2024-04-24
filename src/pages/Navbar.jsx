@@ -35,7 +35,7 @@ const nav=useNavigate()
         <Box  className="flex gap-5 justify-between items-center max-md:flex-wrap max-md:max-w-full">
         {hasAnyPermission(user,"Full-Access","Create-Everything","Create-Employee") && (
 <NavLink to={'/layout/B'}>
-
+{/* 
   <Button  bg={"red"}  className="flex gap-2.5 justify-center  px-11 py-4 my-auto text-lg text-right bg-red-600 rounded-2xl text-neutral-200 max-md:px-5">
     <img
       loading="lazy"
@@ -43,7 +43,16 @@ const nav=useNavigate()
       className="w-6 aspect-square"
     />
     <div className='p-2'>Add new customer</div>
-  </Button>
+  </Button> */}
+
+ <button  className="flex hover:bg-red-500  hover:transition-2s gap-2.5 justify-center px-11 py-4 text-lg text-right whitespace-nowrap bg-red-600 rounded-2xl text-neutral-200 max-md:px-5">
+        <img
+          loading="lazy"
+          src="https://cdn.builder.io/api/v1/image/assets/TEMP/bb8663721bc77ba949380b93cfece2400850f5c88d002b7edf43d1d6d344612a?"
+          className="shrink-0 w-6 aspect-square"
+        />
+        <div className="grow my-auto">Add new customer </div>
+      </button>
 </NavLink>
   )}
   

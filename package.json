@@ -27,6 +27,7 @@
     "js-cookie": "^3.0.5",
     "mdb-react-ui-kit": "^7.0.0",
     "moment": "^2.30.1",
+    "node-fetch": "^3.3.2",
     "plotly.js-dist-min": "^2.30.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
@@ -49,7 +50,8 @@
     "react-youtube": "^10.1.0",
     "styled-components": "^6.1.8",
     "v-calendar": "^2.4.2",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "yup": "^1.4.0"
   },
   "scripts": {
     "start": "react-scripts start",
